@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "npx": "^10.2.2"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "@types/node": "^26.1.2",
+    "typescript": "^7.0.2"
+  },
+  "scripts": {}
+}
