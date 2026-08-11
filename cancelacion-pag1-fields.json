@@ -1,0 +1,100 @@
+[
+  {
+    "id": "15fb0de1-4989-4986-a662-61fb88b3aba1",
+    "tag": "SELECT",
+    "type": "select-one",
+    "label": "unknown",
+    "disabled": false,
+    "value": "1: CC"
+  },
+  {
+    "id": "75fda36b-9317-4062-93d7-26d45e6188d6",
+    "tag": "INPUT",
+    "type": "text",
+    "label": "unknown",
+    "disabled": false,
+    "value": "1047221940"
+  },
+  {
+    "id": "",
+    "tag": "SPAN",
+    "type": "listbox",
+    "label": "No Obligación (4 últimos dígitos)"
+  },
+  {
+    "id": "caae86ca-b4e0-4e59-918e-8f7a1a4d4114",
+    "tag": "SELECT",
+    "type": "select-one",
+    "label": "No Obligación (4 últimos dígitos)",
+    "disabled": false,
+    "value": "197B920B-F53E-47C5-A5B8-00013F5D536F"
+  },
+  {
+    "id": "c5f3bb92-1efe-47ea-941a-5bf2c5f6ceb0",
+    "tag": "INPUT",
+    "type": "text",
+    "label": "unknown",
+    "disabled": false,
+    "value": ""
+  },
+  {
+    "id": "0ab23e22-1c3c-4a43-8c58-207b83625867",
+    "tag": "INPUT",
+    "type": "text",
+    "label": "unknown",
+    "disabled": false,
+    "value": "0"
+  },
+  {
+    "id": "1ad60ed2-e515-4164-8270-54efa1e574fa",
+    "tag": "INPUT",
+    "type": "text",
+    "label": "unknown",
+    "disabled": false,
+    "value": "JENNIFER VERONICA LEONES MENDOZA"
+  },
+  {
+    "id": "4eedfe97-8bf2-499c-a05f-ff25e3ca9b95",
+    "tag": "SELECT",
+    "type": "select-one",
+    "label": "unknown",
+    "disabled": false,
+    "value": "1: SI"
+  },
+  {
+    "id": "",
+    "tag": "SPAN",
+    "type": "listbox",
+    "label": "Marca obligación"
+  },
+  {
+    "id": "8676efb4-1857-48d2-b604-8c4e23917fd0",
+    "tag": "SELECT",
+    "type": "select-one",
+    "label": "Marca obligación",
+    "disabled": false,
+    "value": "6FEFD558-02A1-46ED-ADD5-4D8FC3D4C935"
+  },
+  {
+    "id": "",
+    "tag": "SPAN",
+    "type": "listbox",
+    "label": "Edad Mora"
+  },
+  {
+    "id": "5b9ce178-27fe-4c52-b91d-ba6a898ff546",
+    "tag": "SELECT",
+    "type": "select-one",
+    "label": "Edad Mora",
+    "disabled": false,
+    "value": "265BA9F7-2D10-49B6-8348-8B0DAF518E33"
+  },
+  {
+    "id": "8235c54b-36bd-4880-a29e-fa021ff71595",
+    "tag": "SELECT",
+    "type": "select-one",
+    "label": "unknown",
+    "disabled": false,
+    "value": "1: Si"
+  }
+]

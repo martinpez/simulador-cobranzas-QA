@@ -1,0 +1,43 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e1202]:
+    - navigation [ref=e1203]:
+      - generic [ref=e1205] [cursor=pointer]
+      - generic:
+        - list [ref=e1207]:
+          - listitem [ref=e1208]:
+            - generic [ref=e1209] [cursor=pointer]:
+              - generic [ref=e1210]: 
+              - generic [ref=e1211]: Simulador DNC
+        - generic [ref=e1212]:
+          - img "User" [ref=e1215]
+          - text:  
+    - generic [ref=e1216]:
+      - text:    
+      - form [ref=e1224]:
+        - generic [ref=e1225]:
+          - text: "                    Fecha pago: *                                                                                                               Fecha Pago *                                                                             Fecha de pago Cancelación *  "
+          - tabpanel "Cancelación pag 2" [ref=e1734]:
+            - generic [ref=e1736]:
+              - generic [ref=e1737]: Cancelación Total pag.2
+              - generic [ref=e1740]:
+                - generic [ref=e1742]:
+                  - generic [ref=e1743]: Observaciones de cancelación
+                  - textbox "Observaciones de cancelación" [ref=e1750]: TT GENERA CANCELACION TOTAL PARA EL CREDITO 6588 CON SALDO TOTAL A LA FECHA DE 6400194 CON BAJA EN CUENTA DEL 0 INTERES CORRIENTE INTERES DE MORA, 0 EXTRACONTABLES, 0 DEL CAPITAL Y BAJA EN CUENTA TOTAL DE PARA UN PAGO TOTAL REALIZADOS AL SNR SE INFORMAN CONDICIONES Y RECOMENDACIONES BLOQUEO DE PRODUCTOS CON CUPO POR 120 DIAS ENTREGA DE PAZ Y SALVO EN 45 DIAS HABILES DESPUESDE APLICADO. SE LE INFORMA AL CLIENTE QUE PUEDEN QUEDAR SALDOS POR INTERESES NO FACTURADOS QUE DEBERA ASUMIR. SE LE INFORMA NEGOCIACION SUJETA A VERIFICACION, APROBACION O NEGACION POR PARTE DEL BANCO.
+                - generic [ref=e1752]:
+                  - generic [ref=e1753]: Plantilla SOX
+                  - generic [ref=e1759]:
+                    - textbox "Plantilla SOX" [ref=e1760]: FECHAPAGOXXLLLVALORCONSIGSNRXXLLLVALORPAGOPRODUCTOXX0LLLVALORHONORARIOSXX0LLLVALORPRODUCTOXXLLLTIPONEGXXDOCLLLCUOTAPROYECTADAXXNO APLICALLLOBSERVACIONESXXTT GENERA CANCELACION TOTAL PARA EL CREDITO 6588 CON SALDO TOTAL A LA FECHA DE 6400194 CON BAJA EN CUENTA DEL 0 INTERES CORRIENTE INTERES DE MORA, 0 EXTRACONTABLES, 0 DEL CAPITAL Y BAJA EN CUENTA TOTAL DE PARA UN PAGO TOTAL REALIZADOS AL SNR SE INFORMAN CONDICIONES Y RECOMENDACIONES BLOQUEO DE PRODUCTOS CON CUPO POR 120 DIAS ENTREGA DE PAZ Y SALVO EN 45 DIAS HABILES DESPUESDE APLICADO. SE LE INFORMA AL CLIENTE QUE PUEDEN QUEDAR SALDOS POR INTERESES NO FACTURADOS QUE DEBERA ASUMIR. SE LE INFORMA NEGOCIACION SUJETA A VERIFICACION, APROBACION O NEGACION POR PARTE DEL BANCO.LLLEXCEPCIONXXLLL
+                    - generic [ref=e1761]: 751 / 1100
+                - button "Copiar" [ref=e1768] [cursor=pointer]
+                - button [ref=e1775] [cursor=pointer]
+          - text: "                                    Fecha de Pago: *   Fecha Pago *                              Fecha de Expedición Documento:*                                                                                       "
+      - contentinfo [ref=e1364]:
+        - paragraph [ref=e1365]:
+          - text: Copyright © 2026
+          - link "Lappiz" [ref=e1366] [cursor=pointer]:
+            - /url: https://www.lappiz.io
+          - text: . All rights reserved
+        - paragraph [ref=e1367]:
+          - text: Handcrafted With
+          - generic [ref=e1368]: 
+  - text:                                                                     

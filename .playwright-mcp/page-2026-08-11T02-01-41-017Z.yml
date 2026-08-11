@@ -1,0 +1,133 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e1202]:
+    - navigation [ref=e1203]:
+      - generic [ref=e1205] [cursor=pointer]
+      - generic:
+        - list [ref=e1207]:
+          - listitem [ref=e1208]:
+            - generic [ref=e1209] [cursor=pointer]:
+              - generic [ref=e1210]: 
+              - generic [ref=e1211]: Simulador DNC
+        - generic [ref=e1212]:
+          - img "User" [ref=e1215]
+          - text:  
+    - generic [ref=e1216]:
+      - text:    
+      - form [ref=e1782]:
+        - generic [ref=e1783]:
+          - text: "                   Fecha pago: *                                                                                                               Fecha Pago *                                                                             Fecha de pago Cancelación *                                       Fecha de Pago: *   Fecha Pago *                              Fecha de Expedición Documento:*                                                                "
+          - tabpanel "Ampliacion pag 2" [ref=e2231]:
+            - generic [ref=e2232]:
+              - generic [ref=e2233]:
+                - generic [ref=e2234]: Ampliacion pag 2
+                - generic [ref=e2237]:
+                  - generic [ref=e2239]:
+                    - generic [ref=e2240]: Actividad Economica
+                    - listbox [ref=e2246] [cursor=pointer]:
+                      - generic [ref=e2247]:
+                        - generic [ref=e2248]: Seleccione un registro...
+                        - generic "select" [ref=e2249]: 
+                  - generic [ref=e2252]:
+                    - generic [ref=e2253]: Ingreso Bruto
+                    - generic [ref=e2259]:
+                      - generic [ref=e2261]:
+                        - spinbutton "$0" [ref=e2262]
+                        - text: 
+                        - generic [ref=e2263] [cursor=pointer]:
+                          - generic "Increase value" [ref=e2264]: 
+                          - generic "Decrease value" [ref=e2266]: 
+                      - generic [ref=e2268]: $
+                  - generic [ref=e2271]:
+                    - generic [ref=e2272]: Ocupacion Ing. Adicionales
+                    - listbox [ref=e2278] [cursor=pointer]:
+                      - generic [ref=e2279]:
+                        - generic [ref=e2280]: Seleccione un registro...
+                        - generic "select" [ref=e2281]: 
+                  - generic [ref=e2284]:
+                    - generic [ref=e2285]: Ingreso Adicionales
+                    - generic [ref=e2291]:
+                      - generic [ref=e2293]:
+                        - spinbutton "$0" [ref=e2294]
+                        - text: 
+                        - generic [ref=e2295] [cursor=pointer]:
+                          - generic "Increase value" [ref=e2296]: 
+                          - generic "Decrease value" [ref=e2298]: 
+                      - generic [ref=e2300]: $
+                  - generic [ref=e2303]:
+                    - generic [ref=e2304]: Cuotas Financieras sin BdB
+                    - generic [ref=e2310]:
+                      - generic [ref=e2312]:
+                        - spinbutton "$0" [ref=e2313]
+                        - text: 
+                        - generic [ref=e2314] [cursor=pointer]:
+                          - generic "Increase value" [ref=e2315]: 
+                          - generic "Decrease value" [ref=e2317]: 
+                      - generic [ref=e2319]: $
+                  - generic [ref=e2322]:
+                    - generic [ref=e2323]: Capital Total *
+                    - generic [ref=e2329]:
+                      - generic [ref=e2331]:
+                        - spinbutton "$0" [ref=e2332]
+                        - text: 
+                        - generic [ref=e2333] [cursor=pointer]:
+                          - generic "Increase value" [ref=e2334]: 
+                          - generic "Decrease value" [ref=e2336]: 
+                      - generic [ref=e2338]: $
+                  - generic [ref=e2341]:
+                    - generic [ref=e2342]: Amortización *
+                    - combobox [ref=e2348]:
+                      - option "Seleccione un registro" [selected]
+                      - option "Mes Vencido"
+                      - option "Trimestre Vencido"
+                      - option "Bimestre Vencido"
+                  - generic [ref=e2350]:
+                    - generic [ref=e2351]: Plazo en Meses *
+                    - generic [ref=e2357]:
+                      - generic [ref=e2359]:
+                        - spinbutton "0" [ref=e2360]
+                        - text: 
+                        - generic [ref=e2361] [cursor=pointer]:
+                          - generic "Increase value" [ref=e2362]: 
+                          - generic "Decrease value" [ref=e2364]: 
+                      - generic [ref=e2366]: "#"
+                  - generic [ref=e2369]:
+                    - generic [ref=e2370]: Tipo Tasa Ampliacion
+                    - textbox "Tipo Tasa Ampliacion" [disabled] [ref=e2377]: EFECTIVA
+                  - generic [ref=e2379]:
+                    - generic [ref=e2380]: Tasa EA Ampliacion *
+                    - generic [ref=e2386]:
+                      - generic [ref=e2388]:
+                        - spinbutton "0.00" [ref=e2389]
+                        - text: 
+                        - generic [ref=e2390] [cursor=pointer]:
+                          - generic "Increase value" [ref=e2391]: 
+                          - generic "Decrease value" [ref=e2393]: 
+                      - generic [ref=e2395]: ".00"
+                  - generic [ref=e2398]:
+                    - generic [ref=e2399]: Cuota Proyectada + seguro + papeleria + iva
+                    - generic [ref=e2406]:
+                      - generic:
+                        - spinbutton "$0" [disabled]
+                        - text: 
+                        - generic:
+                          - generic "Increase value": 
+                          - generic "Decrease value": 
+                  - generic [ref=e2408]:
+                    - generic [ref=e2409]: Requiere Tramite Excepcion *
+                    - combobox [ref=e2415]:
+                      - option "Seleccione un registro" [selected]
+                      - option "Si"
+                      - option "No"
+              - generic [ref=e2424]:
+                - button [ref=e2425] [cursor=pointer]
+                - button [ref=e2427] [cursor=pointer]
+      - contentinfo [ref=e1364]:
+        - paragraph [ref=e1365]:
+          - text: Copyright © 2026
+          - link "Lappiz" [ref=e1366] [cursor=pointer]:
+            - /url: https://www.lappiz.io
+          - text: . All rights reserved
+        - paragraph [ref=e1367]:
+          - text: Handcrafted With
+          - generic [ref=e1368]: 
+  - text:                                                                                            

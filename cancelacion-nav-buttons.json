@@ -1,0 +1,212 @@
+[
+  {
+    "class": "button left-button",
+    "visible": false,
+    "display": "block",
+    "visibility": "visible",
+    "text": ""
+  },
+  {
+    "class": "button right-button",
+    "visible": false,
+    "display": "block",
+    "visibility": "visible",
+    "text": ""
+  },
+  {
+    "class": "button2 left-button2",
+    "visible": false,
+    "display": "block",
+    "visibility": "visible",
+    "text": ""
+  },
+  {
+    "class": " button2 right-button2",
+    "visible": false,
+    "display": "block",
+    "visibility": "hidden",
+    "text": ""
+  },
+  {
+    "class": "button left-button",
+    "visible": false,
+    "display": "block",
+    "visibility": "visible",
+    "text": ""
+  },
+  {
+    "class": "button right-buttonAM",
+    "visible": false,
+    "display": "block",
+    "visibility": "visible",
+    "text": ""
+  },
+  {
+    "class": "button left-buttonCA1",
+    "visible": false,
+    "display": "block",
+    "visibility": "visible",
+    "text": ""
+  },
+  {
+    "class": "button right-buttonCA1",
+    "visible": false,
+    "display": "block",
+    "visibility": "visible",
+    "text": ""
+  },
+  {
+    "class": "button left-buttonCA2",
+    "visible": true,
+    "display": "block",
+    "visibility": "visible",
+    "text": ""
+  },
+  {
+    "class": "button right-buttonCA2",
+    "visible": true,
+    "display": "block",
+    "visibility": "hidden",
+    "text": ""
+  },
+  {
+    "class": "button2 left-buttonAM3",
+    "visible": false,
+    "display": "block",
+    "visibility": "visible",
+    "text": ""
+  },
+  {
+    "class": "button2 right-buttonAM3",
+    "visible": false,
+    "display": "block",
+    "visibility": "hidden",
+    "text": ""
+  },
+  {
+    "class": "buttonC4 left-buttonC4",
+    "visible": false,
+    "display": "block",
+    "visibility": "visible",
+    "text": ""
+  },
+  {
+    "class": "buttonC4 right-buttonC4",
+    "visible": false,
+    "display": "block",
+    "visibility": "hidden",
+    "text": ""
+  },
+  {
+    "class": "button left-buttonC2",
+    "visible": false,
+    "display": "block",
+    "visibility": "visible",
+    "text": ""
+  },
+  {
+    "class": "button right-buttonC2",
+    "visible": false,
+    "display": "block",
+    "visibility": "visible",
+    "text": ""
+  },
+  {
+    "class": "button2 left-buttonM2",
+    "visible": false,
+    "display": "block",
+    "visibility": "visible",
+    "text": ""
+  },
+  {
+    "class": "button2 right-buttonM2",
+    "visible": false,
+    "display": "block",
+    "visibility": "hidden",
+    "text": ""
+  },
+  {
+    "class": "button left-buttonC3",
+    "visible": false,
+    "display": "block",
+    "visibility": "visible",
+    "text": ""
+  },
+  {
+    "class": "button right-buttonC3",
+    "visible": false,
+    "display": "block",
+    "visibility": "visible",
+    "text": ""
+  },
+  {
+    "class": "button left-buttonCA3",
+    "visible": false,
+    "display": "block",
+    "visibility": "visible",
+    "text": ""
+  },
+  {
+    "class": "button right-buttonCA3",
+    "visible": false,
+    "display": "block",
+    "visibility": "visible",
+    "text": ""
+  },
+  {
+    "class": "button left-buttonI",
+    "visible": false,
+    "display": "block",
+    "visibility": "visible",
+    "text": ""
+  },
+  {
+    "class": "buttonInf left-buttonInf",
+    "visible": false,
+    "display": "block",
+    "visibility": "visible",
+    "text": ""
+  },
+  {
+    "class": "button left-buttonC",
+    "visible": false,
+    "display": "block",
+    "visibility": "visible",
+    "text": ""
+  },
+  {
+    "class": "button right-buttonC",
+    "visible": false,
+    "display": "block",
+    "visibility": "visible",
+    "text": ""
+  },
+  {
+    "class": "button left-button",
+    "visible": false,
+    "display": "block",
+    "visibility": "visible",
+    "text": ""
+  },
+  {
+    "class": "button right-buttonM",
+    "visible": false,
+    "display": "block",
+    "visibility": "visible",
+    "text": ""
+  },
+  {
+    "class": "button left-buttonAM2",
+    "visible": false,
+    "display": "block",
+    "visibility": "visible",
+    "text": ""
+  },
+  {
+    "class": "button right-buttonAM2",
+    "visible": false,
+    "display": "block",
+    "visibility": "visible",
+    "text": ""
+  }
+]

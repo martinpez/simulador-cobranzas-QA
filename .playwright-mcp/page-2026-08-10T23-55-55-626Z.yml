@@ -1,0 +1,27 @@
+- generic [ref=e11]:
+  - link [ref=e12] [cursor=pointer]:
+    - /url: "#/auth/login/SimiladorDNC_Lappiz"
+    - img "logo-app" [ref=e28]
+  - heading "Usuario C11223344 󰇮" [level=5] [ref=e29]:
+    - generic [ref=e14]:
+      - generic [ref=e15]: Usuario
+      - generic [ref=e16]:
+        - textbox "Usuario" [ref=e17]: C11223344
+        - generic [ref=e18]: 󰇮
+  - generic [ref=e21]:
+    - generic [ref=e30]:
+      - generic: 󰇮
+      - generic [ref=e32]:
+        - generic [ref=e33]: Contraseña
+        - generic [ref=e34]:
+          - textbox "Contraseña" [ref=e35]
+          - generic [ref=e37] [cursor=pointer]:
+            - generic [ref=e38]: 
+            - text: 
+    - generic [ref=e22]:
+      - button "Cancelar" [ref=e39] [cursor=pointer]
+      - button "Login" [disabled] [ref=e40]
+      - heading "Microsoft" [level=4] [ref=e25] [cursor=pointer]:
+        - generic [ref=e26]: 
+        - text: Microsoft
+    - generic [ref=e27] [cursor=pointer]: ¿Recordar contraseña?

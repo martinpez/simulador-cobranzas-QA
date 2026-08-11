@@ -1,0 +1,260 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e1202]:
+    - navigation [ref=e1203]:
+      - generic [ref=e1205] [cursor=pointer]
+      - generic:
+        - list [ref=e1207]:
+          - listitem [ref=e1208]:
+            - generic [ref=e1209] [cursor=pointer]:
+              - generic [ref=e1210]: 
+              - generic [ref=e1211]: Simulador DNC
+        - generic [ref=e1212]:
+          - img "User" [ref=e1215]
+          - text:  
+    - generic [ref=e1216]:
+      - text:    
+      - form [ref=e1224]:
+        - generic [ref=e1225]:
+          - text: "                    Fecha pago: *                                                                                                               Fecha Pago *  "
+          - tabpanel "Cancelación Total" [ref=e1409]:
+            - generic [ref=e1410]:
+              - generic [ref=e1413]:
+                - generic [ref=e1415]:
+                  - generic [ref=e1416]: Aplica Honorarios ?
+                  - combobox [disabled] [ref=e1422]:
+                    - option "Seleccione un registro"
+                    - option "No aplica" [selected]
+                    - option "Honorarios"
+                    - option "Piloto-GXC"
+                - text:   
+              - generic [ref=e1423]:
+                - generic [ref=e1424]: Cancelación Total pag.1
+                - generic [ref=e1427]:
+                  - text:     
+                  - generic [ref=e1429]:
+                    - generic [ref=e1430]: ES UNA "TC"? *
+                    - combobox [ref=e1436]:
+                      - option "Seleccione un registro"
+                      - option "Si"
+                      - option "No" [selected]
+                  - generic [ref=e1438]:
+                    - generic [ref=e1439]: Saldo Total *
+                    - generic [ref=e1445]:
+                      - generic [ref=e1447]:
+                        - spinbutton "$6,400,194" [ref=e1448]
+                        - text: 
+                        - generic [ref=e1449] [cursor=pointer]:
+                          - generic "Increase value" [ref=e1450]: 
+                          - generic "Decrease value" [ref=e1452]: 
+                      - generic [ref=e1454]: $
+                  - generic [ref=e1457]:
+                    - generic [ref=e1458]: Int corrientes *
+                    - generic [ref=e1464]:
+                      - generic [ref=e1466]:
+                        - spinbutton "$79,788" [ref=e1467]
+                        - text: 
+                        - generic [ref=e1468] [cursor=pointer]:
+                          - generic "Increase value" [ref=e1469]: 
+                          - generic "Decrease value" [ref=e1471]: 
+                      - generic [ref=e1473]: $
+                  - generic [ref=e1476]:
+                    - generic [ref=e1477]: Max Baja en cuenta Int Cte
+                    - generic [ref=e1484]:
+                      - generic:
+                        - spinbutton "$0" [disabled]
+                        - text: 
+                        - generic:
+                          - generic "Increase value": 
+                          - generic "Decrease value": 
+                  - generic [ref=e1486]:
+                    - generic [ref=e1487]: Baja en cuenta Int Cte Cancelación
+                    - generic [ref=e1494]:
+                      - generic:
+                        - spinbutton "$0.00" [disabled]
+                        - text: 
+                        - generic:
+                          - generic "Increase value": 
+                          - generic "Decrease value": 
+                  - generic [ref=e1496]:
+                    - generic [ref=e1497]: "%Baja en cuenta Int Cte"
+                    - generic [ref=e1504]:
+                      - generic:
+                        - spinbutton "0.00" [disabled]
+                        - text: 
+                        - generic:
+                          - generic "Increase value": 
+                          - generic "Decrease value": 
+                  - generic [ref=e1506]:
+                    - generic [ref=e1507]: Interés en Mora *
+                    - generic [ref=e1513]:
+                      - generic [ref=e1515]:
+                        - spinbutton "$956" [ref=e1516]
+                        - text: 
+                        - generic [ref=e1517] [cursor=pointer]:
+                          - generic "Increase value" [ref=e1518]: 
+                          - generic "Decrease value" [ref=e1520]: 
+                      - generic [ref=e1522]: $
+                  - generic [ref=e1525]:
+                    - generic [ref=e1526]: Max Baja en cuenta Int Mora
+                    - generic [ref=e1533]:
+                      - generic:
+                        - spinbutton "$0" [disabled]
+                        - text: 
+                        - generic:
+                          - generic "Increase value": 
+                          - generic "Decrease value": 
+                  - generic [ref=e1535]:
+                    - generic [ref=e1536]: Baja en cuenta Int Mora
+                    - generic [ref=e1543]:
+                      - generic:
+                        - spinbutton "$0" [disabled]
+                        - text: 
+                        - generic:
+                          - generic "Increase value": 
+                          - generic "Decrease value": 
+                  - generic [ref=e1545]:
+                    - generic [ref=e1546]: "% Baja en cuenta Int Mora"
+                    - textbox "% Baja en cuenta Int Mora" [disabled] [ref=e1553]: "0"
+                  - generic [ref=e1555]:
+                    - generic [ref=e1556]: Interés ExtraContables TC cancelación
+                    - generic [ref=e1562]:
+                      - generic [ref=e1563]:
+                        - generic:
+                          - spinbutton "$0.00" [disabled]
+                          - text: 
+                          - generic:
+                            - generic "Increase value": 
+                            - generic "Decrease value": 
+                      - generic [ref=e1564]: $
+                  - generic [ref=e1567]:
+                    - generic [ref=e1568]: Max Baja en cuenta Int Extrac "TC"
+                    - generic [ref=e1575]:
+                      - generic:
+                        - spinbutton "$0" [disabled]
+                        - text: 
+                        - generic:
+                          - generic "Increase value": 
+                          - generic "Decrease value": 
+                  - generic [ref=e1577]:
+                    - generic [ref=e1578]: Baja en cuenta Int Extrac "TC"
+                    - generic [ref=e1585]:
+                      - generic:
+                        - spinbutton "$0" [disabled]
+                        - text: 
+                        - generic:
+                          - generic "Increase value": 
+                          - generic "Decrease value": 
+                  - generic [ref=e1587]:
+                    - generic [ref=e1588]: "% Dcsc Int Extrac \"TC\""
+                    - generic [ref=e1595]:
+                      - generic:
+                        - spinbutton "0.00" [disabled]
+                        - text: 
+                        - generic:
+                          - generic "Increase value": 
+                          - generic "Decrease value": 
+                  - generic [ref=e1597]:
+                    - generic [ref=e1598]: Capital Total *
+                    - generic [ref=e1604]:
+                      - generic [ref=e1606]:
+                        - spinbutton "$6,258,640" [ref=e1607]
+                        - text: 
+                        - generic [ref=e1608] [cursor=pointer]:
+                          - generic "Increase value" [ref=e1609]: 
+                          - generic "Decrease value" [ref=e1611]: 
+                      - generic [ref=e1613]: $
+                  - generic [ref=e1616]:
+                    - generic [ref=e1617]: Max Baja en cuenta Capital
+                    - generic [ref=e1624]:
+                      - generic:
+                        - spinbutton "$0" [disabled]
+                        - text: 
+                        - generic:
+                          - generic "Increase value": 
+                          - generic "Decrease value": 
+                  - generic [ref=e1626]:
+                    - generic [ref=e1627]: Baja en cuenta Capital *
+                    - generic [ref=e1634]:
+                      - generic:
+                        - spinbutton "$0" [disabled]
+                        - text: 
+                        - generic:
+                          - generic "Increase value": 
+                          - generic "Decrease value": 
+                  - generic [ref=e1636]:
+                    - generic [ref=e1637]: "% Baja en cuenta Capital"
+                    - generic [ref=e1644]:
+                      - generic:
+                        - spinbutton "0.00" [disabled]
+                        - text: 
+                        - generic:
+                          - generic "Increase value": 
+                          - generic "Decrease value": 
+                  - generic [ref=e1646]:
+                    - generic [ref=e1647]: Max Baja en cuentas *
+                    - generic [ref=e1654]:
+                      - generic:
+                        - spinbutton "$0" [disabled]
+                        - text: 
+                        - generic:
+                          - generic "Increase value": 
+                          - generic "Decrease value": 
+                  - generic [ref=e1656]:
+                    - generic [ref=e1657]: Abono minimo con Max % permitido
+                    - generic [ref=e1664]:
+                      - generic:
+                        - spinbutton "$6,410,194" [disabled]
+                        - text: 
+                        - generic:
+                          - generic "Increase value": 
+                          - generic "Decrease value": 
+                  - generic [ref=e1666]:
+                    - generic [ref=e1667]: Bajas en cuentas Aplicadas
+                    - generic [ref=e1674]:
+                      - generic:
+                        - spinbutton "$0" [disabled]
+                        - text: 
+                        - generic:
+                          - generic "Increase value": 
+                          - generic "Decrease value": 
+                  - generic [ref=e1676]:
+                    - generic [ref=e1677]: Pago al SNR *
+                    - generic [ref=e1683]:
+                      - generic [ref=e1685]:
+                        - spinbutton "0" [ref=e1686]
+                        - text: 
+                        - generic [ref=e1687] [cursor=pointer]:
+                          - generic "Increase value" [ref=e1688]: 
+                          - generic "Decrease value" [ref=e1690]: 
+                      - generic [ref=e1692]: "#"
+                  - text:      
+                  - generic [ref=e1695]:
+                    - generic [ref=e1696]: Fecha de pago Cancelación *
+                    - generic [ref=e1705]:
+                      - generic [ref=e1706]:
+                        - combobox [ref=e1707]
+                        - generic: Fecha de pago Cancelación *
+                      - generic [ref=e1708]:
+                        - text: 
+                        - button "Select" [ref=e1709] [cursor=pointer]:
+                          - generic [ref=e1710]: 
+                  - generic [ref=e1713]:
+                    - generic [ref=e1714]: Requiere trámite *
+                    - combobox [ref=e1720]:
+                      - option "Seleccione un registro" [selected]
+                      - option "SI"
+                      - option "NO"
+              - generic [ref=e1729]:
+                - button [ref=e1730] [cursor=pointer]
+                - button [ref=e1732] [cursor=pointer]
+          - text: "                                    Fecha de Pago: *   Fecha Pago *                              Fecha de Expedición Documento:*                                                                                       "
+      - contentinfo [ref=e1364]:
+        - paragraph [ref=e1365]:
+          - text: Copyright © 2026
+          - link "Lappiz" [ref=e1366] [cursor=pointer]:
+            - /url: https://www.lappiz.io
+          - text: . All rights reserved
+        - paragraph [ref=e1367]:
+          - text: Handcrafted With
+          - generic [ref=e1368]: 
+  - text:                                                                     

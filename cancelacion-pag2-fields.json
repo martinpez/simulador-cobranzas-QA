@@ -1,0 +1,32 @@
+{
+  "panelLabel": "ngb-nav-39",
+  "textareas": [
+    {
+      "id": "24e68f6c-b401-40d9-bb2d-ec6d246426f9",
+      "label": "Observaciones de cancelación",
+      "disabled": false,
+      "valuePreview": "TT GENERA CANCELACION TOTAL PARA EL CREDITO 6588 C"
+    },
+    {
+      "id": "d4f89a7c-0207-4756-9bd7-e2e669ac3ce0",
+      "label": "Plantilla SOX",
+      "disabled": false,
+      "valuePreview": "FECHAPAGOXXLLLVALORCONSIGSNRXXLLLVALORPAGOPRODUCTO"
+    }
+  ],
+  "inputs": [],
+  "buttons": [
+    {
+      "text": "Copiar",
+      "className": "copiarCA"
+    },
+    {
+      "text": "",
+      "className": "button left-buttonCA2"
+    },
+    {
+      "text": "",
+      "className": "button right-buttonCA2"
+    }
+  ]
+}

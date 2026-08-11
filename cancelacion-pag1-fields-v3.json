@@ -1,0 +1,262 @@
+{
+  "panelLabel": "ngb-nav-38",
+  "fieldCount": 32,
+  "fields": [
+    {
+      "id": "bda37ca7-d503-4d41-8ff4-aebde2cb7c30",
+      "tag": "SELECT",
+      "type": "select-one",
+      "label": "Aplica Honorarios ?",
+      "disabled": true,
+      "value": "1: No aplica"
+    },
+    {
+      "id": "aa665762-9b2f-47f8-8d8c-cabca1924771",
+      "tag": "INPUT",
+      "type": "text",
+      "label": "Pago minimo:",
+      "disabled": false,
+      "value": "154600"
+    },
+    {
+      "id": "8e8d6cf2-299c-4b45-8059-64cf50b2bd11",
+      "tag": "SELECT",
+      "type": "select-one",
+      "label": "Línea",
+      "disabled": false,
+      "value": ""
+    },
+    {
+      "id": "27cfef98-5ca4-415e-8149-7149479d487a",
+      "tag": "INPUT",
+      "type": "text",
+      "label": "Días Mora*",
+      "disabled": false,
+      "value": "0"
+    },
+    {
+      "id": "dfe46e30-5328-485e-bc80-bec20aab2d02",
+      "tag": "SELECT",
+      "type": "select-one",
+      "label": "Tipo de Cartera",
+      "disabled": false,
+      "value": ""
+    },
+    {
+      "id": "876c30bc-ba27-4ec4-ad2e-1635b23cdccb",
+      "tag": "SELECT",
+      "type": "select-one",
+      "label": "ES UNA \"TC\"? *",
+      "disabled": false,
+      "value": "2: No"
+    },
+    {
+      "id": "f47f1a89-6743-4f60-9cf6-0696e6c841ca",
+      "tag": "INPUT",
+      "type": "text",
+      "label": "Saldo Total *",
+      "disabled": false,
+      "value": "6400194"
+    },
+    {
+      "id": "48f8260e-5e81-43d3-b69c-d94808cb229e",
+      "tag": "INPUT",
+      "type": "text",
+      "label": "Int corrientes *",
+      "disabled": false,
+      "value": "79788"
+    },
+    {
+      "id": "1c23cf01-dd67-4c9a-a4b6-871c781eec02",
+      "tag": "INPUT",
+      "type": "text",
+      "label": "Max Baja en cuenta Int Cte",
+      "disabled": true,
+      "value": "0"
+    },
+    {
+      "id": "86f86bd7-d119-4d2a-a6c0-e711b1d835a6",
+      "tag": "INPUT",
+      "type": "text",
+      "label": "Baja en cuenta Int Cte Cancelación",
+      "disabled": true,
+      "value": "0"
+    },
+    {
+      "id": "bcfd54b6-d1cf-40dc-8677-686652eedbb8",
+      "tag": "INPUT",
+      "type": "text",
+      "label": "%Baja en cuenta Int Cte",
+      "disabled": true,
+      "value": "0"
+    },
+    {
+      "id": "d85c85c3-2a7c-44db-b240-2420990d7375",
+      "tag": "INPUT",
+      "type": "text",
+      "label": "Interés en Mora *",
+      "disabled": false,
+      "value": "956"
+    },
+    {
+      "id": "0c422603-5f6e-4c23-a7b5-b78cf30ba1d8",
+      "tag": "INPUT",
+      "type": "text",
+      "label": "Max Baja en cuenta Int Mora",
+      "disabled": true,
+      "value": "0"
+    },
+    {
+      "id": "a6ee4c8b-a6c5-4bd8-8c30-9e29b9c40115",
+      "tag": "INPUT",
+      "type": "text",
+      "label": "Baja en cuenta Int Mora",
+      "disabled": true,
+      "value": "0"
+    },
+    {
+      "id": "433ffa22-78e7-4004-be47-2b0ccf497ad1",
+      "tag": "INPUT",
+      "type": "text",
+      "label": "% Baja en cuenta Int Mora",
+      "disabled": true,
+      "value": "0"
+    },
+    {
+      "id": "a9977387-4683-4d89-9e58-851cb72f9886",
+      "tag": "INPUT",
+      "type": "text",
+      "label": "Interés ExtraContables TC cancelación",
+      "disabled": true,
+      "value": "0"
+    },
+    {
+      "id": "6e01ec4d-1391-4878-8886-be49eef96d27",
+      "tag": "INPUT",
+      "type": "text",
+      "label": "Max Baja en cuenta Int Extrac \"TC\"",
+      "disabled": true,
+      "value": "0"
+    },
+    {
+      "id": "8ea64929-53a9-41b4-a01f-a14b74293d01",
+      "tag": "INPUT",
+      "type": "text",
+      "label": "Baja en cuenta Int Extrac \"TC\"",
+      "disabled": true,
+      "value": "0"
+    },
+    {
+      "id": "a724067d-e7bf-435c-94ac-bf44f72575e7",
+      "tag": "INPUT",
+      "type": "text",
+      "label": "% Dcsc Int Extrac \"TC\"",
+      "disabled": true,
+      "value": "0"
+    },
+    {
+      "id": "9dc154b0-5d64-4682-a76d-5e946415c253",
+      "tag": "INPUT",
+      "type": "text",
+      "label": "Capital Total *",
+      "disabled": false,
+      "value": "6258640"
+    },
+    {
+      "id": "79b6141f-1973-4c00-b0ae-a26b657115e5",
+      "tag": "INPUT",
+      "type": "text",
+      "label": "Max Baja en cuenta Capital",
+      "disabled": true,
+      "value": "0"
+    },
+    {
+      "id": "60bebeab-d3ca-4547-9eff-00cc8db69b82",
+      "tag": "INPUT",
+      "type": "text",
+      "label": "Baja en cuenta Capital *",
+      "disabled": true,
+      "value": "0"
+    },
+    {
+      "id": "aa7aeaf3-6bc8-4939-9896-212d5efcd93e",
+      "tag": "INPUT",
+      "type": "text",
+      "label": "% Baja en cuenta Capital",
+      "disabled": true,
+      "value": "0"
+    },
+    {
+      "id": "7a94fe37-1d84-4232-9298-4e1986cdead2",
+      "tag": "INPUT",
+      "type": "text",
+      "label": "Max Baja en cuentas *",
+      "disabled": true,
+      "value": "0"
+    },
+    {
+      "id": "0864b793-256f-41f6-ab7c-5b5c18c1f51f",
+      "tag": "INPUT",
+      "type": "text",
+      "label": "Abono minimo con Max % permitido",
+      "disabled": true,
+      "value": "6410194"
+    },
+    {
+      "id": "7ed52d26-15c9-4f11-9177-55a380d1427d",
+      "tag": "INPUT",
+      "type": "text",
+      "label": "Bajas en cuentas Aplicadas",
+      "disabled": true,
+      "value": "0"
+    },
+    {
+      "id": "b5c33a6d-9d65-4920-8a39-e73621b7daa9",
+      "tag": "INPUT",
+      "type": "text",
+      "label": "Pago al SNR",
+      "disabled": false,
+      "value": "0"
+    },
+    {
+      "id": "9ee8ee24-5ae5-42da-83c5-36948592e72b",
+      "tag": "INPUT",
+      "type": "text",
+      "label": "Valor Honorarios Maximo",
+      "disabled": true,
+      "value": "0"
+    },
+    {
+      "id": "a0a2b9b0-17cc-41fe-be98-2ac2157e33ef",
+      "tag": "INPUT",
+      "type": "text",
+      "label": "Honorarios",
+      "disabled": false,
+      "value": "0"
+    },
+    {
+      "id": "e99362f1-b8da-4cca-8982-c8af8dcb5caf",
+      "tag": "SELECT",
+      "type": "select-one",
+      "label": "Requiere trámite *",
+      "disabled": false,
+      "value": "0: undefined"
+    },
+    {
+      "id": "8e8d6cf2-299c-4b45-8059-64cf50b2bd11",
+      "tag": "KENDO-LISTBOX",
+      "type": "listbox",
+      "label": "Línea",
+      "disabled": false,
+      "value": "Seleccione un registro...Selec"
+    },
+    {
+      "id": "dfe46e30-5328-485e-bc80-bec20aab2d02",
+      "tag": "KENDO-LISTBOX",
+      "type": "listbox",
+      "label": "Tipo de Cartera",
+      "disabled": false,
+      "value": "Seleccione un registro...Selec"
+    }
+  ]
+}

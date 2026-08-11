@@ -1,0 +1,22 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e226]:
+    - link [ref=e227] [cursor=pointer]:
+      - /url: "#/auth/login/SimiladorDNC_Lappiz"
+      - img "logo-app" [ref=e228]
+    - heading "Usuario 󰇮" [level=5] [ref=e229]:
+      - generic [ref=e230]:
+        - generic [ref=e231]: Usuario
+        - generic [ref=e232]:
+          - textbox "Usuario" [ref=e233]
+          - generic [ref=e234]: 󰇮
+    - generic [ref=e237]:
+      - generic:
+        - generic: 󰇮
+        - text:  
+      - generic [ref=e238]:
+        - button "Siguiente" [ref=e239] [cursor=pointer]
+        - heading "Microsoft" [level=4] [ref=e241] [cursor=pointer]:
+          - generic [ref=e242]: 
+          - text: Microsoft
+      - generic [ref=e243] [cursor=pointer]: ¿Recordar contraseña?
+  - text:                       

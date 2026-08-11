@@ -1,0 +1,98 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e42]:
+    - navigation [ref=e43]:
+      - generic [ref=e45] [cursor=pointer]
+      - generic:
+        - list [ref=e47]:
+          - listitem [ref=e48]:
+            - generic [ref=e49] [cursor=pointer]:
+              - generic [ref=e50]: 
+              - generic [ref=e51]: Simulador DNC
+        - generic [ref=e52]:
+          - img "User" [ref=e55]
+          - text:  
+    - generic [ref=e56]:
+      - text:    
+      - form [ref=e77]:
+        - generic [ref=e78]:
+          - tabpanel "Principal" [ref=e79]:
+            - generic [ref=e80]:
+              - generic [ref=e82]:
+                - generic [ref=e83]: Principal
+                - generic [ref=e86]:
+                  - generic [ref=e88]:
+                    - generic [ref=e89]: Tipo documento
+                    - combobox [ref=e95]:
+                      - option "Seleccione un registro"
+                      - option "CC" [selected]
+                      - option "CE"
+                      - option "NIT"
+                      - option "PAS"
+                      - option "TI"
+                  - generic [ref=e97]:
+                    - generic [ref=e98]: "Ingrese No Identificación:"
+                    - textbox "Ingrese No Identificación:" [ref=e105]
+                  - generic [ref=e107]:
+                    - generic [ref=e108]: No Obligación (4 últimos dígitos)
+                    - listbox [ref=e114] [cursor=pointer]:
+                      - generic [ref=e115]:
+                        - generic [ref=e116]: Seleccione un registro...
+                        - generic "select" [ref=e117]
+                  - generic [ref=e120]:
+                    - generic [ref=e121]: Obligación.
+                    - textbox "Obligación." [ref=e128]
+                  - generic [ref=e130]:
+                    - generic [ref=e131]: Cantidad.
+                    - generic [ref=e137]:
+                      - generic [ref=e139]:
+                        - spinbutton "0" [ref=e140]
+                        - text: 
+                        - generic [ref=e141] [cursor=pointer]:
+                          - generic "Increase value" [ref=e142]: 
+                          - generic "Decrease value" [ref=e144]: 
+                      - generic [ref=e146]: "#"
+                  - generic [ref=e149]:
+                    - generic [ref=e150]: Nombre cliente
+                    - textbox "Nombre cliente" [ref=e157]
+                  - generic [ref=e159]:
+                    - generic [ref=e160]: Mecanismo cambia condiciones?
+                    - combobox [ref=e166]:
+                      - option "Seleccione un registro" [selected]
+                      - option "SI"
+                      - option "NO"
+                  - generic [ref=e168]:
+                    - generic [ref=e169]: Marca obligación
+                    - listbox [ref=e175] [cursor=pointer]:
+                      - generic [ref=e176]:
+                        - generic [ref=e177]: Seleccione un registro...
+                        - generic "select" [ref=e178]: 
+                  - generic [ref=e181]:
+                    - generic [ref=e182]: Edad Mora
+                    - listbox [ref=e188] [cursor=pointer]:
+                      - generic [ref=e189]:
+                        - generic [ref=e190]: Seleccione un registro...
+                        - generic "select" [ref=e191]: 
+                  - generic [ref=e194]:
+                    - generic [ref=e195]: Gestión telefónica
+                    - combobox [ref=e201]:
+                      - option "Seleccione un registro" [selected]
+                      - option "Si"
+                      - option "No"
+              - generic [ref=e210]:
+                - button "Consolidación de Productos" [ref=e211] [cursor=pointer]
+                - button "Novaciones" [ref=e212] [cursor=pointer]
+                - button "Pago Mora" [ref=e213] [cursor=pointer]
+                - button "Cancelación Total" [ref=e214] [cursor=pointer]
+                - button "Ampliación" [ref=e215] [cursor=pointer]
+          - text: "              Fecha pago: *                                                                                                               Fecha Pago *                                                                             Fecha de pago Cancelación *                                       Fecha de Pago: *   Fecha Pago *                              Fecha de Expedición Documento:*                                                                                       "
+      - contentinfo [ref=e60]:
+        - paragraph [ref=e61]:
+          - text: Copyright © 2026
+          - link "Lappiz" [ref=e62] [cursor=pointer]:
+            - /url: https://www.lappiz.io
+          - text: . All rights reserved
+        - paragraph [ref=e63]:
+          - text: Handcrafted With
+          - generic [ref=e64]: 
+  - text:                       
+  - alertdialog "Información actualizada" [ref=e217]

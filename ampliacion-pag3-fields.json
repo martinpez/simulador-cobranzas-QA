@@ -1,0 +1,37 @@
+{
+  "panel": null,
+  "fields": [
+    {
+      "id": "68d8ce24-c9fd-440b-995a-7ff027f628b6",
+      "label": "Observaciones",
+      "type": "textarea",
+      "disabled": false
+    },
+    {
+      "id": "eec3136d-46bf-438c-b7cc-4aaa5fba776b",
+      "label": "Plantilla SOX",
+      "type": "textarea",
+      "disabled": false
+    }
+  ],
+  "buttons": [
+    {
+      "class": "copiar4",
+      "text": "Copiar",
+      "visible": true,
+      "visibility": "visible"
+    },
+    {
+      "class": "button2 left-buttonAM3",
+      "text": "",
+      "visible": true,
+      "visibility": "visible"
+    },
+    {
+      "class": "button2 right-buttonAM3",
+      "text": "",
+      "visible": true,
+      "visibility": "hidden"
+    }
+  ]
+}
