@@ -4,13 +4,9 @@
  * Mapeo de IDs y selectores de la aplicación.
  * Generado con Playwright MCP navegando la app real.
  *
- * Datos de prueba utilizados para este mapeo:
- *   CC: 1047221940
- *   Obligación: 6588 (GUID: 197B920B-F53E-47C5-A5B8-00013F5D536F)
- *   Cliente: JENNIFER VERONICA LEONES MENDOZA
- *
  * NOTA: Los GUIDs son generados por Lappiz y pueden variar entre ambientes.
  *       Los IDs listados corresponden al ambiente de pruebas actual.
+ *       Los datos sensibles de prueba se cargan desde .env_data.
  */
 
 // ============================================================
@@ -105,11 +101,7 @@ export const PRINCIPAL = {
     placeholderText: 'Seleccione un registro...',
     /** Para Playwright: */
     getByRole: { role: 'listbox' as const },
-    /** Valores conocidos (CC 1047221940): */
-    knownValues: {
-      '4254': '1231974A-539E-43F2-8CE4-A918D1C37287',
-      '6588': '197B920B-F53E-47C5-A5B8-00013F5D536F',
-    },
+    /** La obligación de prueba se carga desde .env_data (CONTROL_OBLIGATION). */
   },
 
   nombreCliente: {

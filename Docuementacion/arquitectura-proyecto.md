@@ -19,8 +19,6 @@ AutomatizacionDev/
 │       ├── cancelacion-total.md
 │       ├── ampliacion-de-plazo.md
 │       └── consolidacion-de-productos.md
-├── opencode/
-│   └── contexto-sesion.md
 └── simulador-cobranza-tests/
     ├── playwright.config.ts
     ├── package.json
@@ -60,7 +58,6 @@ AutomatizacionDev/
 - `tests/`: pruebas independientes por mecanismo.
 - `reportes/`: resultados y evidencias de las ejecuciones.
 - `Docuementacion/`: definición funcional y técnica del proyecto.
-- `opencode/`: contexto de trabajo utilizado para retomar sesiones de desarrollo.
 
 Cada suite debe reutilizar el flujo general de ingreso, selección de obligación, selección del mecanismo, diligenciamiento y validación. Las diferencias propias de cada negocio deben permanecer en la página y en los casos del mecanismo correspondiente.
 

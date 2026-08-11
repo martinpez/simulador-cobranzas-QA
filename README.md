@@ -41,7 +41,6 @@ La definición detallada de este flujo está en las [consideraciones del proyect
 - [Arquitectura del proyecto](Docuementacion/arquitectura-proyecto.md)
 - [Consideraciones del proyecto](Docuementacion/consideraciones-proyecto.md)
 - [Consideraciones técnicas](Docuementacion/consideraciones-tecnicas.md)
-- [Contexto de trabajo](opencode/contexto-sesion.md)
 
 ## Resultado esperado
 

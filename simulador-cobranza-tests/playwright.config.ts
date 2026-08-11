@@ -7,10 +7,22 @@ dotenv.config({
   quiet: true,
 });
 
+dotenv.config({
+  path: path.resolve(__dirname, '.env_data'),
+  quiet: true,
+});
+
 const baseURL = process.env.BASE_URL;
-console.log("BASE_URL", baseURL);
 if (!baseURL) {
   throw new Error('La variable BASE_URL no está definida en el archivo .env');
+}
+
+const controlDocNumber = process.env.CONTROL_DOCUMENT_NUMBER;
+const controlObligation = process.env.CONTROL_OBLIGATION;
+if (!controlDocNumber || !controlObligation) {
+  throw new Error(
+    'Faltan variables CONTROL_DOCUMENT_NUMBER o CONTROL_OBLIGATION en el archivo .env_data'
+  );
 }
 
 /**
