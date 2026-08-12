@@ -1095,6 +1095,220 @@ export const AMPLIACION_PAG3 = {
 } as const;
 
 // ============================================================
+// CONSOLIDACIÓN DE PRODUCTOS - Página 1
+// ============================================================
+export const CONSOLIDACION_PAG1 = {
+  tab: { tabpanel: '[role="tabpanel"][aria-labelledby="ngb-nav-14"]' },
+
+  /** Contenedor de tarjetas; su cantidad depende de las obligaciones del cliente. */
+  cards: {
+    container: '#consolidacion .card1',
+    byObligation: (obligation: string) =>
+      `#consolidacion .card1:has(h3:has-text("Obligación: ${obligation}"))`,
+    heading: (obligation: string) =>
+      `#consolidacion .card1:has(h3:has-text("Obligación: ${obligation}")) > h3`,
+    toggle: (obligation: string) =>
+      `#consolidacion .card1:has(h3:has-text("Obligación: ${obligation}")) input[type="checkbox"]`,
+    toggleLabel: (obligation: string) =>
+      `#consolidacion .card1:has(h3:has-text("Obligación: ${obligation}")) .toggle-switch label`,
+    field: (obligation: string, dataLabel: string) =>
+      `#consolidacion .card1:has(h3:has-text("Obligación: ${obligation}")) [data-label='${dataLabel}']`,
+    marcaObligacion: (obligation: string) =>
+      `#consolidacion .card1:has(h3:has-text("Obligación: ${obligation}")) select.marca-obligacion`,
+  },
+
+  /** Caso usado durante el levantamiento: solo esta obligación se selecciona. */
+  casoMapeo: {
+    obligacionSeleccionada: '4254',
+    toggle: '#toggle-4254',
+    toggleLabel: 'label[for="toggle-4254"]',
+    obligacionNoSeleccionada: '6588',
+    toggleNoSeleccionado: '#toggle-6588',
+  },
+
+  agregarObligacion: {
+    label: 'Adicionar obligación',
+    id: 'adicionar-obligacion',
+    css: 'button#adicionar-obligacion',
+  },
+
+  /** Campos repetidos dentro de cada tarjeta. */
+  labels: {
+    saldoTotal: 'Saldo Total *',
+    honorarios: 'Honorarios *',
+    interesCorriente: 'Interes Corriente *',
+    interesMora: 'Interes Mora *',
+    interesExtracontablesTC: 'Int Extracontables "TC"',
+    marcaObligacion: 'Marca Obligación',
+  },
+} as const;
+
+// ============================================================
+// CONSOLIDACIÓN DE PRODUCTOS - Página 2
+// ============================================================
+export const CONSOLIDACION_PAG2 = {
+  tab: { tabpanel: '[role="tabpanel"][aria-labelledby="ngb-nav-8"]' },
+
+  totalBajaIntCorrientes: {
+    label: 'Total Baja en cuenta Int Corrientes',
+    id: '04dbcb19-8f74-4eac-81f3-6bcc76cd7f9a',
+    css: 'input[id="04dbcb19-8f74-4eac-81f3-6bcc76cd7f9a"]',
+    disabled: true,
+  },
+  totalBajaIntMora: {
+    label: 'Total Baja en cuenta Int Mora',
+    id: 'f848cad9-f94d-4e56-9468-863a2a55e402',
+    css: 'input[id="f848cad9-f94d-4e56-9468-863a2a55e402"]',
+    disabled: true,
+  },
+  totalBajaExtracontables: {
+    label: 'Total Baja en cuenta Extracontables',
+    id: 'dc9166ce-a5c8-4fc7-ad2b-4c6479d63f12',
+    css: 'input[id="dc9166ce-a5c8-4fc7-ad2b-4c6479d63f12"]',
+    disabled: true,
+  },
+  porcentajeBajaIntCte: {
+    label: '% Baja en cuenta Int Cte',
+    id: 'b42b41d8-cd57-4233-9bff-8a5ceec5af03',
+    css: 'input[id="b42b41d8-cd57-4233-9bff-8a5ceec5af03"]',
+    disabled: true,
+  },
+  porcentajeBajaIntMora: {
+    label: '% Baja en cuenta Int Mora',
+    id: 'e079d101-5148-42ed-854e-9be982adc01e',
+    css: 'input[id="e079d101-5148-42ed-854e-9be982adc01e"]',
+    disabled: true,
+  },
+  porcentajeBajaIntExtracTC: {
+    label: '% Baja en cuenta Int Extrac "TC"',
+    id: 'e970af6e-de8d-47b3-97d0-98e4950c9bdf',
+    css: 'input[id="e970af6e-de8d-47b3-97d0-98e4950c9bdf"]',
+    disabled: true,
+  },
+  totalHonorarios: {
+    label: 'Total Honorarios',
+    id: '4f89c370-65c2-43d8-90aa-6b3e3b29906b',
+    css: 'input[id="4f89c370-65c2-43d8-90aa-6b3e3b29906b"]',
+    disabled: true,
+  },
+  saldoTotalDesembolsar: {
+    label: 'Saldo total a desembolsar',
+    id: '69b7fc43-675b-4984-bd64-9fd68799a97b',
+    css: 'input[id="69b7fc43-675b-4984-bd64-9fd68799a97b"]',
+    disabled: true,
+  },
+  marcaObligacion: {
+    label: 'Marca de Obligación',
+    id: '183f4194-c998-41a4-9a8c-1436cc78132f',
+    css: 'input[id="183f4194-c998-41a4-9a8c-1436cc78132f"]',
+    disabled: true,
+  },
+  amortizacion: {
+    label: 'Amortización *',
+    id: '03011879-0560-4a41-826b-888c89f6ab83',
+    css: 'select[id="03011879-0560-4a41-826b-888c89f6ab83"]',
+    options: ['Mes vencido'] as const,
+  },
+  plazoMeses: {
+    label: 'Indique el plazo en meses(max 72) *',
+    id: 'aa4de771-cbaf-486d-8de2-06941dc220d5',
+    css: 'input[id="aa4de771-cbaf-486d-8de2-06941dc220d5"]',
+  },
+  tasaEA: {
+    label: 'Tasa de int E.A.%',
+    id: 'c9f5317e-9099-43f1-9b7f-78b93d99aa6a',
+    css: 'input[id="c9f5317e-9099-43f1-9b7f-78b93d99aa6a"]',
+  },
+  cuotaProyectada: {
+    label: 'Cuota proyectada+Seguro+Papeleria+IVA',
+    id: 'e74b2587-dccc-4395-8333-f6c2f34338aa',
+    css: 'input[id="e74b2587-dccc-4395-8333-f6c2f34338aa"]',
+    disabled: true,
+  },
+  pagoNegociacion: {
+    label: 'Pago para la negociación *',
+    id: '0ee03528-b018-47d1-856b-9e30dbae2ddf',
+    css: 'input[id="0ee03528-b018-47d1-856b-9e30dbae2ddf"]',
+  },
+  fechaPago: {
+    label: 'Fecha de Pago: *',
+    getByRole: { role: 'combobox' as const },
+    selectButton: 'button[aria-label="Select"]',
+  },
+  requiereTramiteExcepcion: {
+    label: 'Requiere tramite de excepción *',
+    id: '48dfc177-18ab-4c7c-91a9-e2a63c92dc15',
+    css: 'select[id="48dfc177-18ab-4c7c-91a9-e2a63c92dc15"]',
+    options: ['Si', 'No'] as const,
+  },
+} as const;
+
+// ============================================================
+// CONSOLIDACIÓN DE PRODUCTOS - Actividad Económica
+// ============================================================
+export const CONSOLIDACION_ACTIVIDAD = {
+  tab: { tabpanel: '[role="tabpanel"][aria-labelledby="ngb-nav-10"]' },
+
+  cuotasFinancierasMensuales: {
+    label: 'Cuotas financieras mensuales sin la del BDB: *',
+    id: 'bae90b7e-42e0-40a3-a806-9f9a6227b20e',
+    css: 'input[id="bae90b7e-42e0-40a3-a806-9f9a6227b20e"]',
+  },
+  actividadEconomica: {
+    label: 'Actividad económica *',
+    id: 'c852f2a7-6f9c-48f6-96b5-6fdc26c399ef',
+    hostSelector: '[aria-owns="c852f2a7-6f9c-48f6-96b5-6fdc26c399ef_listbox"]',
+    css: 'select[id="c852f2a7-6f9c-48f6-96b5-6fdc26c399ef"]',
+    options: [
+      'Profesional Independiente', 'Servicios', 'No Refiere', 'Agropecuario',
+      'Pensionado', 'Otras Actividades de Servicio', 'Desempleado',
+      'Manufactura', 'Comerciante', 'Trasportador', 'Rentista Capital', 'Asalariado',
+    ] as const,
+  },
+  ingresoBruto: {
+    label: 'Ingreso bruto: *',
+    id: '67631aed-75e4-4b23-8601-17cadd1c7003',
+    css: 'input[id="67631aed-75e4-4b23-8601-17cadd1c7003"]',
+  },
+  ocupacionIngresosAdicionales: {
+    label: 'Ocupación ingresos adicionales: *',
+    id: 'b54af750-167e-4831-bb8c-c374e7f45202',
+    hostSelector: '[aria-owns="b54af750-167e-4831-bb8c-c374e7f45202_listbox"]',
+    css: 'select[id="b54af750-167e-4831-bb8c-c374e7f45202"]',
+    options: [
+      'Profesional Independiente', 'Servicios', 'No Refiere', 'Agropecuario',
+      'Pensionado', 'Otras Actividades de Servicio', 'Desempleado',
+      'Manufactura', 'Comerciante', 'Trasportador', 'Rentista Capital', 'Asalariado',
+    ] as const,
+  },
+  ingresosAdicionales: {
+    label: 'Ingresos adicionales *',
+    id: '1a47c2c1-4551-4d13-89ca-82e89ce655c0',
+    css: 'input[id="1a47c2c1-4551-4d13-89ca-82e89ce655c0"]',
+  },
+} as const;
+
+// ============================================================
+// CONSOLIDACIÓN DE PRODUCTOS - Página 4 / SOX
+// ============================================================
+export const CONSOLIDACION_PAG4 = {
+  tab: { tabpanel: '[role="tabpanel"][aria-labelledby="ngb-nav-7"]' },
+  observaciones: {
+    label: 'Observaciones:',
+    id: 'be70a202-71a9-40ea-851b-945702693b51',
+    css: 'textarea[id="be70a202-71a9-40ea-851b-945702693b51"]',
+    getByRole: { role: 'textbox' as const, name: 'Observaciones:' },
+  },
+  plantillaSOX: {
+    label: 'Plantilla SOX',
+    id: 'f3979225-f563-48a2-a206-6b5866a7dc6c',
+    css: 'textarea[id="f3979225-f563-48a2-a206-6b5866a7dc6c"]',
+    getByRole: { role: 'textbox' as const, name: 'Plantilla SOX' },
+  },
+  copiarButton: { text: 'Copiar', css: 'button.copiar2' },
+} as const;
+
+// ============================================================
 // MAPA DE GUIDs SOX (para validación cruzada)
 // ============================================================
 export const SOX_MAP = {
@@ -1143,6 +1357,10 @@ export function findByLabel(label: string): { css: string; getByRole?: { role: s
     AMPLIACION_PAG1,
     AMPLIACION_PAG2,
     AMPLIACION_PAG3,
+    CONSOLIDACION_PAG1,
+    CONSOLIDACION_PAG2,
+    CONSOLIDACION_ACTIVIDAD,
+    CONSOLIDACION_PAG4,
   ];
   for (const section of allSections) {
     for (const [, field] of Object.entries(section)) {
