@@ -25,7 +25,7 @@ AutomatizacionDev/
     ├── tsconfig.json
     ├── data/
     │   ├── casos-prueba.csv
-    │   └── datos-prueba.csv
+    │   └── data.csv
     ├── src/
     │   ├── pages/
     │   │   ├── LoginPage.ts
