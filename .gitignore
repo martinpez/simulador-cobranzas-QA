@@ -13,3 +13,7 @@ node_modules/
 
 # Snapshots de levantamiento de campos (solo locales, no versionados)
 /*.json
+
+# Datos de prueba confidenciales
+simulador-cobranza-tests/data/
+/*.csv
