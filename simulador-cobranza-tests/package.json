@@ -8,5 +8,12 @@
     "@types/node": "^26.1.2",
     "typescript": "^7.0.2"
   },
-  "scripts": {}
+  "scripts": {
+    "test": "playwright test",
+    "test:main": "playwright test --project=control",
+    "test:pagomora": "playwright test --project=pagomora",
+    "test:dev": "playwright test --project=control --debug",
+    "test:prod": "playwright test --project=control --ui",
+    "report": "playwright show-report"
+  }
 }

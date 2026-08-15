@@ -95,7 +95,9 @@ export const PRINCIPAL = {
     /** ID del select oculto detrás del Kendo dropdown */
     id: 'caae86ca-b4e0-4e59-918e-8f7a1a4d4114',
     /** Host visible del Kendo dropdown (role="listbox") */
-    hostSelector: '[aria-owns="caae86ca-b4e0-4e59-918e-8f7a1a4d4114_listbox"]',
+    hostSelector:
+      'span[role="listbox"][aria-owns="caae86ca-b4e0-4e59-918e-8f7a1a4d4114_listbox"]',
+    listboxSelector: '#caae86ca-b4e0-4e59-918e-8f7a1a4d4114_listbox',
     css: 'select[id="caae86ca-b4e0-4e59-918e-8f7a1a4d4114"]',
     /** Texto mostrado cuando no hay selección */
     placeholderText: 'Seleccione un registro...',
