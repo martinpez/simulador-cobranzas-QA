@@ -1,5 +1,6 @@
 import path from 'node:path';
-import { expect, test, type Page, type TestInfo } from '@playwright/test';
+import { type Page, type TestInfo } from '@playwright/test';
+import { expect, test } from '../../fixtures/persistent-playwright';
 import {
   findCase,
   getValue,
@@ -88,11 +89,69 @@ async function loadPagoMora(page: Page, row: CsvRow): Promise<void> {
   }
 }
 
-async function comparePagoMora(page: Page, row: CsvRow, testInfo: TestInfo): Promise<void> {
-  const caseId = getValue(row, 'id_caso');
-  const expected = findCase(comparisonRows, caseId);
-  expect(expected, `No existe resultado esperado para ${caseId}`).toBeTruthy();
+const comparisonFields = [
+  'gxc_honorarios',
+  'abono_minimo_max',
+  'max_total_baja',
+  'bajacuentaIntCte',
+  'bajacuentaIntMora',
+  'bajacuentaIntExtra',
+  'sox',
+] as const;
 
+function isPagoMoraCase(row: CsvRow): boolean {
+  return (
+    getValue(row, 'id_caso').toUpperCase().startsWith('PM_') ||
+    normalizeMechanism(getValue(row, 'mecanismo')) === 'pagomora'
+  );
+}
+
+function getPagoMoraCaseIds(): string[] {
+  const ids = [...negotiationRows, ...comparisonRows]
+    .filter(isPagoMoraCase)
+    .map((row) => getValue(row, 'id_caso').trim().toUpperCase())
+    .filter(Boolean);
+
+  return [...new Set(ids)];
+}
+
+function getCaseDataError(
+  caseId: string,
+  negotiationCase: CsvRow | undefined,
+  expectedCase: CsvRow | undefined
+): string | undefined {
+  if (!negotiationCase) {
+    return `El caso ${caseId} existe en data_compare.csv, pero no en datos_negociacion.csv.`;
+  }
+
+  if (!expectedCase) {
+    return `El caso ${caseId} existe en datos_negociacion.csv, pero no en data_compare.csv.`;
+  }
+
+  const negotiationMechanism = normalizeMechanism(getValue(negotiationCase, 'mecanismo'));
+  const expectedMechanism = normalizeMechanism(getValue(expectedCase, 'mecanismo'));
+  if (negotiationMechanism !== 'pagomora' || expectedMechanism !== 'pagomora') {
+    return `El caso ${caseId} debe tener mecanismo Pago Mora en ambos archivos.`;
+  }
+
+  const negotiationDocument = getValue(negotiationCase, 'num_documento');
+  const expectedDocument = getValue(expectedCase, 'num_documento');
+  if (negotiationDocument && expectedDocument && negotiationDocument !== expectedDocument) {
+    return (
+      `El caso ${caseId} tiene documentos diferentes: ` +
+      `${negotiationDocument} en datos_negociacion.csv y ${expectedDocument} en data_compare.csv.`
+    );
+  }
+
+  return undefined;
+}
+
+async function comparePagoMora(
+  page: Page,
+  row: CsvRow,
+  expected: CsvRow,
+  testInfo: TestInfo
+): Promise<void> {
   const actual: Record<string, string> = {
     gxc_honorarios: await readSelectLabel(page, PAGO_MORA_PAG1.aplicaHonorarios.css),
     abono_minimo_max: await readNumeric(page, PAGO_MORA_PAG1.abonoMinimoMaxPermitido.css),
@@ -102,9 +161,24 @@ async function comparePagoMora(page: Page, row: CsvRow, testInfo: TestInfo): Pro
     bajacuentaIntExtra: await readNumeric(page, PAGO_MORA_PAG1.maxBajaCuentaExtraCTC.css),
     sox: await page.locator(PAGO_MORA_PAG2.sox.css).inputValue(),
   };
+  const actualFields = new Set(Object.keys(actual).map(normalizeMechanism));
 
-  const comparisons = Object.keys(actual).map((field) => {
-    const expectedValue = getValue(expected!, field);
+  for (const field of Object.keys(expected)) {
+    if (['id_caso', 'mecanismo', 'num_documento'].includes(field)) {
+      continue;
+    }
+
+    const expectedValue = getValue(expected, field);
+    if (nonEmpty(expectedValue) && !actualFields.has(normalizeMechanism(field))) {
+      throw new Error(
+        `El campo esperado "${field}" del caso ${getValue(row, 'id_caso')} ` +
+          'no tiene una lectura configurada para Pago Mora.'
+      );
+    }
+  }
+
+  const comparisons = comparisonFields.map((field) => {
+    const expectedValue = getValue(expected, field);
     if (!nonEmpty(expectedValue)) {
       return { field, skipped: true, expected: '', actual: actual[field], pass: true };
     }
@@ -141,17 +215,25 @@ async function comparePagoMora(page: Page, row: CsvRow, testInfo: TestInfo): Pro
 }
 
 const pagoMoraCases = negotiationRows.filter(
-  (row) =>
-    getValue(row, 'id_caso').toUpperCase().startsWith('PM_') &&
-    normalizeMechanism(getValue(row, 'mecanismo')) === 'pagomora'
+  isPagoMoraCase
 );
 
-for (const row of pagoMoraCases) {
-  const caseId = getValue(row, 'id_caso').toUpperCase();
+for (const caseId of getPagoMoraCaseIds()) {
+  const row = findCase(pagoMoraCases, caseId);
+  const expected = findCase(comparisonRows, caseId);
+  const dataError = getCaseDataError(caseId, row, expected);
+
+  if (dataError) {
+    test(`${caseId} - Pago Mora - validación de datos`, () => {
+      throw new Error(dataError);
+    });
+    continue;
+  }
+
   test(`${caseId} - Pago Mora`, async ({ page }, testInfo) => {
     await login(page);
-    await loadPrincipal(page, row);
-    await loadPagoMora(page, row);
-    await comparePagoMora(page, row, testInfo);
+    await loadPrincipal(page, row!);
+    await loadPagoMora(page, row!);
+    await comparePagoMora(page, row!, expected!, testInfo);
   });
 }

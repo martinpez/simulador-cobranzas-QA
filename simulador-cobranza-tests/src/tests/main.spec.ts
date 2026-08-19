@@ -1,5 +1,5 @@
 import path from 'node:path';
-import { expect, test } from '@playwright/test';
+import { expect, test } from '../fixtures/persistent-playwright';
 import { findCase, readCsv } from '../utils/csv-data';
 import { loadPrincipal, login } from '../utils/simulador-flow';
 
