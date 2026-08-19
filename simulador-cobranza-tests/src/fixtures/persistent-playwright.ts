@@ -30,7 +30,7 @@ export const test = base.extend<PersistentFixtures>({
   context: async ({ }, use) => {
     const profileDirectory = getProfileDirectory();
     const context = await chromium.launchPersistentContext(profileDirectory, {
-      channel: 'chrome',
+      channel: 'chromium',
       headless: false,
       locale: 'es-CO',
       timezoneId: 'America/Bogota',

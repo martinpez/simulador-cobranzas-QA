@@ -10,10 +10,10 @@ import {
   type CsvRow,
 } from '../../utils/csv-data';
 import {
+  CANCELACION_PAG1,
+  CANCELACION_PAG2,
   MECANISMOS,
   NAV,
-  PAGO_MORA_PAG1,
-  PAGO_MORA_PAG2,
 } from '../../utils/selectors';
 import {
   fillNumeric,
@@ -31,41 +31,73 @@ const comparePath = path.resolve(__dirname, '../../../data/data_compare.csv');
 const negotiationRows = readCsv(dataPath);
 const comparisonRows = readCsv(comparePath);
 
-async function loadPagoMora(page: Page, row: CsvRow): Promise<void> {
-  await page.locator(MECANISMOS.pagoMora).click();
-  await expect(page.locator(PAGO_MORA_PAG1.pagoAlSNR.css)).toBeAttached();
+async function loadCancelacion(page: Page, row: CsvRow): Promise<void> {
+  await page.locator(MECANISMOS.cancelacion).click();
+  await expect(page.locator(CANCELACION_PAG1.pagoMinimo.css)).toBeAttached();
 
   const esUnaTc = getValue(row, 'es_una_tc');
   if (nonEmpty(esUnaTc)) {
-    await selectLabel(page, page.locator(PAGO_MORA_PAG1.esUnaTC.css), esUnaTc);
+    await selectLabel(page, page.locator(CANCELACION_PAG1.esUnaTC.css), esUnaTc);
   }
 
   const pagoMinimo = getValue(row, 'pago_minimo');
   if (nonEmpty(pagoMinimo)) {
-    await fillNumeric(page, PAGO_MORA_PAG1.pagoMinimo.css, pagoMinimo);
+    await fillNumeric(page, CANCELACION_PAG1.pagoMinimo.css, pagoMinimo);
+  }
+
+  const linea = getValue(row, 'linea');
+  if (nonEmpty(linea)) {
+    await selectLabel(page, page.locator(CANCELACION_PAG1.linea.css), linea);
+  }
+
+  const diasMora = getValue(row, 'dias_mora');
+  if (nonEmpty(diasMora)) {
+    await fillNumeric(page, CANCELACION_PAG1.diasMora.css, diasMora);
+  }
+
+  const tipoCartera = getValue(row, 'tipo_cartera');
+  if (nonEmpty(tipoCartera)) {
+    await selectLabel(page, page.locator(CANCELACION_PAG1.tipoCartera.css), tipoCartera);
+  }
+
+  const saldoTotal = getValue(row, 'saldo_total');
+  if (nonEmpty(saldoTotal)) {
+    await fillNumeric(page, CANCELACION_PAG1.saldoTotal.css, saldoTotal);
   }
 
   const interesCorriente = getValue(row, 'interes_cte', 'interes_corriente');
   if (nonEmpty(interesCorriente)) {
-    await fillNumeric(page, PAGO_MORA_PAG1.interesCorriente.css, interesCorriente);
+    await fillNumeric(page, CANCELACION_PAG1.interesCorriente.css, interesCorriente);
   }
 
   const interesMora = getValue(row, 'interes_mora');
   if (nonEmpty(interesMora)) {
-    await fillNumeric(page, PAGO_MORA_PAG1.interesMora.css, interesMora);
+    await fillNumeric(page, CANCELACION_PAG1.interesMora.css, interesMora);
+  }
+
+  const interesExtra = getValue(row, 'interes_extracontables_tc', 'interes_extracontable_tc');
+  if (nonEmpty(interesExtra)) {
+    await fillNumeric(page, CANCELACION_PAG1.interesExtracontablesTC.css, interesExtra);
+  }
+
+  const capitalTotal = getValue(row, 'capital_total');
+  if (nonEmpty(capitalTotal)) {
+    await fillNumeric(page, CANCELACION_PAG1.capitalTotal.css, capitalTotal);
   }
 
   const pagoSnr = getValue(row, 'pago_snr', 'pago_al_snr');
   if (nonEmpty(pagoSnr)) {
-    await fillNumeric(page, PAGO_MORA_PAG1.pagoAlSNR.css, pagoSnr);
+    await fillNumeric(page, CANCELACION_PAG1.pagoAlSNR.css, pagoSnr);
   }
 
-  await page.locator(`${NAV.rightArrowM}:visible`).click();
-  await expect(page.locator(PAGO_MORA_PAG2.cuotaVencida.css)).toBeAttached();
+  const honorarios = getValue(row, 'honorarios');
+  if (nonEmpty(honorarios)) {
+    await fillNumeric(page, CANCELACION_PAG1.honorarios.css, honorarios);
+  }
 
-  const cuotaVencida = getValue(row, 'cuota_vencida');
-  if (nonEmpty(cuotaVencida)) {
-    await selectLabel(page, page.locator(PAGO_MORA_PAG2.cuotaVencida.css), cuotaVencida);
+  const requiereTramite = getValue(row, 'requiere_tramite');
+  if (nonEmpty(requiereTramite)) {
+    await selectLabel(page, page.locator(CANCELACION_PAG1.requiereTramite.css), requiereTramite);
   }
 
   const fechaPago = getValue(row, 'fecha_pago');
@@ -83,15 +115,16 @@ async function loadPagoMora(page: Page, row: CsvRow): Promise<void> {
     await dateInput.press('Tab');
   }
 
-  const tramite = getValue(row, 'tramite_excepcion', 'requiere_tramite_excepcion');
-  if (nonEmpty(tramite)) {
-    await selectLabel(page, page.locator(PAGO_MORA_PAG2.requiereTramiteExcepcion.css), tramite);
-  }
+  await page.locator(`${NAV.rightArrowCA1}:visible`).click();
+  await expect(page.locator(CANCELACION_PAG2.plantillaSOX.css)).toBeAttached();
 }
 
 const comparisonFields = [
   'gxc_honorarios',
+  'linea',
+  'tipo_cartera',
   'abono_minimo_max',
+  'maximohonorarios',
   'max_total_baja',
   'bajacuentaIntCte',
   'bajacuentaIntMora',
@@ -99,16 +132,16 @@ const comparisonFields = [
   'sox',
 ] as const;
 
-function isPagoMoraCase(row: CsvRow): boolean {
+function isCancelacionCase(row: CsvRow): boolean {
   return (
-    getValue(row, 'id_caso').toUpperCase().startsWith('PM_') ||
-    normalizeMechanism(getValue(row, 'mecanismo')) === 'pagomora'
+    getValue(row, 'id_caso').toUpperCase().startsWith('CAN_') ||
+    normalizeMechanism(getValue(row, 'mecanismo')) === 'cancelacion'
   );
 }
 
-function getPagoMoraCaseIds(): string[] {
+function getCancelacionCaseIds(): string[] {
   const ids = [...negotiationRows, ...comparisonRows]
-    .filter(isPagoMoraCase)
+    .filter(isCancelacionCase)
     .map((row) => getValue(row, 'id_caso').trim().toUpperCase())
     .filter(Boolean);
 
@@ -130,8 +163,8 @@ function getCaseDataError(
 
   const negotiationMechanism = normalizeMechanism(getValue(negotiationCase, 'mecanismo'));
   const expectedMechanism = normalizeMechanism(getValue(expectedCase, 'mecanismo'));
-  if (negotiationMechanism !== 'pagomora' || expectedMechanism !== 'pagomora') {
-    return `El caso ${caseId} debe tener mecanismo Pago Mora en ambos archivos.`;
+  if (negotiationMechanism !== 'cancelacion' || expectedMechanism !== 'cancelacion') {
+    return `El caso ${caseId} debe tener mecanismo Cancelación en ambos archivos.`;
   }
 
   const negotiationDocument = getValue(negotiationCase, 'num_documento');
@@ -146,20 +179,26 @@ function getCaseDataError(
   return undefined;
 }
 
-async function comparePagoMora(
+async function compareCancelacion(
   page: Page,
   row: CsvRow,
   expected: CsvRow,
   testInfo: TestInfo
 ): Promise<void> {
   const actual: Record<string, string> = {
-    gxc_honorarios: await readSelectLabel(page, PAGO_MORA_PAG1.aplicaHonorarios.css),
-    abono_minimo_max: await readNumeric(page, PAGO_MORA_PAG1.abonoMinimoMaxPermitido.css),
-    max_total_baja: await readNumeric(page, PAGO_MORA_PAG1.maxTotalBajaCuenta.css),
-    bajacuentaIntCte: await readNumeric(page, PAGO_MORA_PAG1.maxBajaCuentaIntCte.css),
-    bajacuentaIntMora: await readNumeric(page, PAGO_MORA_PAG1.maxBajaCuentaIntMora.css),
-    bajacuentaIntExtra: await readNumeric(page, PAGO_MORA_PAG1.maxBajaCuentaExtraCTC.css),
-    sox: await page.locator(PAGO_MORA_PAG2.sox.css).inputValue(),
+    gxc_honorarios: await readSelectLabel(page, CANCELACION_PAG1.aplicaHonorarios.css),
+    linea: await readSelectLabel(page, CANCELACION_PAG1.linea.css),
+    tipo_cartera: await readSelectLabel(page, CANCELACION_PAG1.tipoCartera.css),
+    abono_minimo_max: await readNumeric(
+      page,
+      CANCELACION_PAG1.abonoMinimoMaxPermitido.css
+    ),
+    maximohonorarios: await readNumeric(page, CANCELACION_PAG1.valorHonorariosMaximo.css),
+    max_total_baja: await readNumeric(page, CANCELACION_PAG1.maxBajaEnCuentas.css),
+    bajacuentaIntCte: await readNumeric(page, CANCELACION_PAG1.bajaCuentaIntCte.css),
+    bajacuentaIntMora: await readNumeric(page, CANCELACION_PAG1.bajaCuentaIntMora.css),
+    bajacuentaIntExtra: await readNumeric(page, CANCELACION_PAG1.bajaCuentaIntExtracTC.css),
+    sox: await page.locator(CANCELACION_PAG2.plantillaSOX.css).inputValue(),
   };
   const actualFields = new Set(Object.keys(actual).map(normalizeMechanism));
 
@@ -172,7 +211,7 @@ async function comparePagoMora(
     if (nonEmpty(expectedValue) && !actualFields.has(normalizeMechanism(field))) {
       throw new Error(
         `El campo esperado "${field}" del caso ${getValue(row, 'id_caso')} ` +
-          'no tiene una lectura configurada para Pago Mora.'
+          'no tiene una lectura configurada para Cancelación.'
       );
     }
   }
@@ -183,7 +222,7 @@ async function comparePagoMora(
       return { field, skipped: true, expected: '', actual: actual[field], pass: true };
     }
 
-    if (field === 'gxc_honorarios' || field === 'sox') {
+    if (['gxc_honorarios', 'linea', 'tipo_cartera', 'sox'].includes(field)) {
       return {
         field,
         skipped: false,
@@ -211,29 +250,29 @@ async function comparePagoMora(
     contentType: 'application/json',
   });
 
-  expect(comparisons.filter((comparison) => !comparison.pass), 'Diferencias de Pago Mora').toEqual([]);
+  expect(comparisons.filter((comparison) => !comparison.pass), 'Diferencias de Cancelación').toEqual(
+    []
+  );
 }
 
-const pagoMoraCases = negotiationRows.filter(
-  isPagoMoraCase
-);
+const cancelacionCases = negotiationRows.filter(isCancelacionCase);
 
-for (const caseId of getPagoMoraCaseIds()) {
-  const row = findCase(pagoMoraCases, caseId);
+for (const caseId of getCancelacionCaseIds()) {
+  const row = findCase(cancelacionCases, caseId);
   const expected = findCase(comparisonRows, caseId);
   const dataError = getCaseDataError(caseId, row, expected);
 
   if (dataError) {
-    test(`${caseId} - Pago Mora - validación de datos`, () => {
+    test(`${caseId} - Cancelación - validación de datos`, () => {
       throw new Error(dataError);
     });
     continue;
   }
 
-  test(`${caseId} - Pago Mora`, async ({ page }, testInfo) => {
+  test(`${caseId} - Cancelación`, async ({ page }, testInfo) => {
     await login(page);
     await loadPrincipal(page, row!);
-    await loadPagoMora(page, row!);
-    await comparePagoMora(page, row!, expected!, testInfo);
+    await loadCancelacion(page, row!);
+    await compareCancelacion(page, row!, expected!, testInfo);
   });
 }

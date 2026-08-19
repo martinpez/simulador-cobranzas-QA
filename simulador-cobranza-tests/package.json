@@ -12,6 +12,7 @@
     "test": "playwright test",
     "test:main": "playwright test --project=control",
     "test:pagomora": "playwright test --project=pagomora",
+    "test:cancelacion": "playwright test --project=cancelacion",
     "test:dev": "playwright test --project=control --debug",
     "test:prod": "playwright test --project=control --ui",
     "report": "playwright show-report"

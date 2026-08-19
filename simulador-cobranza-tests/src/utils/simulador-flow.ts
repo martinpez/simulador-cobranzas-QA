@@ -63,7 +63,11 @@ export async function login(page: Page): Promise<void> {
   await loginWithCredentials(page);
 }
 
-export async function selectLabel(select: Locator, expectedValue: string): Promise<void> {
+export async function selectLabel(
+  page: Page,
+  select: Locator,
+  expectedValue: string
+): Promise<void> {
   const expected = normalizedText(expectedValue);
   const options = await select.locator('option').evaluateAll((elements) =>
     elements.map((element) => {
@@ -78,7 +82,32 @@ export async function selectLabel(select: Locator, expectedValue: string): Promi
   );
 
   expect(option, `No existe la opción "${expectedValue}"`).toBeTruthy();
-  await select.selectOption({ value: option!.value });
+
+  if (await select.isVisible()) {
+    await select.selectOption({ value: option!.value });
+    return;
+  }
+
+  const id = await select.getAttribute('id');
+  const host = id
+    ? page.locator(`[role="listbox"][aria-owns="${id}_listbox"]:visible`).first()
+    : null;
+  if (!host || (await host.count()) === 0) {
+    await select.evaluate((element, value) => {
+      const nativeSelect = element as HTMLSelectElement;
+      nativeSelect.value = value;
+      nativeSelect.dispatchEvent(new Event('input', { bubbles: true }));
+      nativeSelect.dispatchEvent(new Event('change', { bubbles: true }));
+    }, option!.value);
+    return;
+  }
+
+  await host!.click();
+
+  const visibleListbox = page.locator(`[id="${id}_listbox"]:visible`);
+  await visibleListbox
+    .getByRole('option', { name: option!.label, exact: true })
+    .click();
 }
 
 export async function fillNumeric(page: Page, selector: string, value: string): Promise<void> {
@@ -146,7 +175,7 @@ export async function loadPrincipal(page: Page, row: CsvRow): Promise<void> {
     )
     .catch(() => null);
 
-  await selectLabel(page.locator(PRINCIPAL.tipoDocumento.css), getValue(row, 'tipo_doc'));
+  await selectLabel(page, page.locator(PRINCIPAL.tipoDocumento.css), getValue(row, 'tipo_doc'));
   await page.locator(PRINCIPAL.identificacion.css).fill(getValue(row, 'num_documento'));
   await page.locator(PRINCIPAL.identificacion.css).press('Enter');
   await page.waitForTimeout(1_000);
@@ -190,16 +219,16 @@ export async function loadPrincipal(page: Page, row: CsvRow): Promise<void> {
 
   const marca = getValue(row, 'marcaobl', 'marca_obligacion');
   if (nonEmpty(marca)) {
-    await selectLabel(page.locator(PRINCIPAL.marcaObligacion.css), marca);
+    await selectLabel(page, page.locator(PRINCIPAL.marcaObligacion.css), marca);
   }
 
   const edadMora = getValue(row, 'edad_mora');
   if (nonEmpty(edadMora)) {
-    await selectLabel(page.locator(PRINCIPAL.edadMora.css), edadMora);
+    await selectLabel(page, page.locator(PRINCIPAL.edadMora.css), edadMora);
   }
 
   const gestionTelefonica = getValue(row, 'gestion_telefonica');
   if (nonEmpty(gestionTelefonica)) {
-    await selectLabel(page.locator(PRINCIPAL.gestionTelefonica.css), gestionTelefonica);
+    await selectLabel(page, page.locator(PRINCIPAL.gestionTelefonica.css), gestionTelefonica);
   }
 }

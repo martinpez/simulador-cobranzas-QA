@@ -53,6 +53,12 @@ export default defineConfig({
       dependencies: ['control'],
       use: { ...devices['Desktop Chrome'] },
     },
+    {
+      name: 'cancelacion',
+      testMatch: /cancelacion\/.*\.spec\.ts/,
+      dependencies: ['control'],
+      use: { ...devices['Desktop Chrome'] },
+    },
   ],
 
   /* Run your local dev server before starting the tests */
