@@ -33,7 +33,7 @@ const comparisonRows = readCsv(comparePath);
 
 async function loadPagoMora(page: Page, row: CsvRow): Promise<void> {
   await page.locator(MECANISMOS.pagoMora).click();
-  await expect(page.locator(PAGO_MORA_PAG1.pagoAlSNR.css)).toBeAttached();
+  await expect(page.locator(PAGO_MORA_PAG1.tab.tabpanel)).toBeVisible({ timeout: 30_000 });
 
   const esUnaTc = getValue(row, 'es_una_tc');
   if (nonEmpty(esUnaTc)) {
@@ -45,7 +45,7 @@ async function loadPagoMora(page: Page, row: CsvRow): Promise<void> {
     await fillNumeric(page, PAGO_MORA_PAG1.pagoMinimo.css, pagoMinimo);
   }
 
-  const interesCorriente = getValue(row, 'interes_cte', 'interes_corriente');
+  const interesCorriente = getValue(row, 'interes_cte');
   if (nonEmpty(interesCorriente)) {
     await fillNumeric(page, PAGO_MORA_PAG1.interesCorriente.css, interesCorriente);
   }
@@ -60,8 +60,11 @@ async function loadPagoMora(page: Page, row: CsvRow): Promise<void> {
     await fillNumeric(page, PAGO_MORA_PAG1.pagoAlSNR.css, pagoSnr);
   }
 
-  await page.locator(`${NAV.rightArrowM}:visible`).click();
-  await expect(page.locator(PAGO_MORA_PAG2.cuotaVencida.css)).toBeAttached();
+  await page
+    .locator(PAGO_MORA_PAG1.tab.tabpanel)
+    .locator(`${NAV.rightArrowM}:visible`)
+    .click();
+  await expect(page.locator(PAGO_MORA_PAG2.tab.tabpanel)).toBeVisible({ timeout: 30_000 });
 
   const cuotaVencida = getValue(row, 'cuota_vencida');
   if (nonEmpty(cuotaVencida)) {

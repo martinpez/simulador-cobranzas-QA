@@ -23,17 +23,18 @@ Verificar que una negociación de Cancelación Total cargue correctamente la obl
 - **Validaciones individuales:** honorarios, gastos, FUN y demás campos que apliquen.
 - **Tarjetas:** confirmar el resultado esperado cuando la obligación corresponda a una tarjeta de crédito.
 
-## Validaciones
+## Validaciones implementadas
 
-- Carga de datos de la obligación.
-- Pago y valores de cancelación.
-- Porcentajes, baja total, abonos y demás valores esperados.
-- Honorarios, gastos y FUN cuando correspondan.
-- Indicador esperado para tarjeta de crédito cuando aplique.
-- Valores clave de la información SOX.
+- Carga de datos de la obligación y selección de Cancelación Total.
+- Diligenciamiento condicional de los valores presentes en `datos_negociacion.csv`.
+- Navegación entre las dos páginas del mecanismo.
+- Línea, tipo de cartera, pago mínimo, días de mora, saldos, intereses, capital, pago al SNR, honorarios, trámite y fecha de pago cuando estén definidos.
+- `gxc_honorarios`, abono mínimo, bajas en cuenta, máximo total de baja y SOX contra `data_compare.csv`.
+- Campos numéricos como números y campos de texto, incluido SOX, con texto normalizado.
+- Evidencias de datos cargados y resultado de comparación por caso.
 
 ## Datos y casos
 
-Los casos deben registrarse con el identificador del mecanismo, por ejemplo `CAN_001`. La estructura general se encuentra en [Casos y datos de prueba](../casos-de-prueba.md).
+Los casos deben registrarse con el identificador del mecanismo, por ejemplo `CAN_001`. La suite se ejecuta mediante el proyecto Playwright `cancelacion`, después de que pase el proyecto `control`. La estructura general se encuentra en [Casos y datos de prueba](../casos-de-prueba.md).
 
 Para referencias de selectores, SOX y ambiente, consultar las [consideraciones técnicas](../consideraciones-tecnicas.md).

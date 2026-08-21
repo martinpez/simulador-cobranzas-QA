@@ -23,16 +23,18 @@ Verificar que una negociación de Ampliación de Plazo cargue correctamente la o
 - **Validaciones individuales:** campos y cálculos propios de la ampliación.
 - **Casos excepcionales:** plazos o condiciones poco usuales con resultado previamente validado.
 
-## Validaciones
+## Validaciones implementadas
 
-- Carga de datos de la obligación.
-- Nuevo plazo y condiciones de la negociación.
-- Tasa, porcentajes, pagos, abonos y demás valores esperados.
-- Campos adicionales definidos para el caso.
-- Valores clave de la información SOX.
+- Carga de datos de la obligación y selección de Ampliación de Plazo.
+- Diligenciamiento condicional de los valores presentes en `datos_negociacion.csv`.
+- Navegación entre las tres páginas del mecanismo.
+- Intereses, pagos, honorarios, fecha, actividad económica, ingresos, plazo, amortización, tasa E.A. y trámite cuando estén definidos.
+- `gxc_honorarios`, línea, tipo de cartera, abono, bajas en cuenta y SOX contra `data_compare.csv`.
+- Campos numéricos como números y campos de texto, incluido SOX, con texto normalizado.
+- Evidencias de datos cargados y resultado de comparación por caso.
 
 ## Datos y casos
 
-Los casos deben registrarse con el identificador del mecanismo, por ejemplo `AMP_001`. La estructura general se encuentra en [Casos y datos de prueba](../casos-de-prueba.md).
+Los casos deben registrarse con el identificador del mecanismo, por ejemplo `AMP_001`. La suite se ejecuta mediante el proyecto Playwright `ampliacion`, después de que pase el proyecto `control`. La estructura general se encuentra en [Casos y datos de prueba](../casos-de-prueba.md).
 
 Para referencias de selectores, SOX y ambiente, consultar las [consideraciones técnicas](../consideraciones-tecnicas.md).

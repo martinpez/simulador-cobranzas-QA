@@ -2,7 +2,7 @@
 
 [Volver al README principal](../README.md)
 
-La automatización se organizará separando la configuración, los datos, las páginas de la aplicación, las utilidades y las pruebas. La estructura es una referencia para la implementación y puede ajustarse cuando se confirme la ubicación definitiva del proyecto de automatización.
+La automatización se organiza separando la configuración, los datos, las utilidades y las pruebas. La estructura refleja el estado actual de la implementación y puede ajustarse cuando se incorporen los mecanismos pendientes.
 
 ```text
 AutomatizacionDev/
@@ -19,59 +19,64 @@ AutomatizacionDev/
 │       ├── cancelacion-total.md
 │       ├── ampliacion-de-plazo.md
 │       └── consolidacion-de-productos.md
+├── *.json                          # Snapshots de levantamiento de campos (solo locales, gitignored)
 └── simulador-cobranza-tests/
     ├── playwright.config.ts
     ├── package.json
-    ├── tsconfig.json
+    ├── .env                         # BASE_URL, User, Password (gitignored)
+    ├── .env_data                    # Datos del caso de control (gitignored)
+    ├── .env_data.example
     ├── data/
-    │   ├── casos-prueba.csv
-    │   └── data.csv
+    │   ├── datos_negociacion.csv    # Entradas de la negociación por caso
+    │   ├── data_compare.csv         # Valores esperados para comparar
+    │   └── data.csv                 # Exportación base de clientes/obligaciones (referencia)
     ├── src/
-    │   ├── pages/
-    │   │   ├── LoginPage.ts
-    │   │   ├── SimuladorPage.ts
-    │   │   ├── PagoMoraPage.ts
-    │   │   ├── NovacionPage.ts
-    │   │   ├── CancelacionPage.ts
-    │   │   ├── AmpliacionPage.ts
-    │   │   └── ConsolidacionPage.ts
-    │   ├── utils/
-    │   │   ├── mapeo-guids.ts
-    │   │   ├── sox-parser.ts
-    │   │   ├── csv-loader.ts
-    │   │   └── reporte.ts
-    │   └── tests/
-    │       ├── control.spec.ts
-    │       ├── pago-de-mora.spec.ts
-    │       ├── novacion.spec.ts
-    │       ├── cancelacion-total.spec.ts
-    │       ├── ampliacion-de-plazo.spec.ts
-    │       └── consolidacion-de-productos.spec.ts
-    └── reportes/
+    │   ├── tests/
+    │   │   ├── main.spec.ts                       # Caso de control AC_0001
+    │   │   ├── pagomora/pagomora.spec.ts          # Suite de Pago de Mora
+    │   │   ├── novacion/                          # Pendiente
+     │   │   ├── cancelacion/cancelacion.spec.ts    # Suite de Cancelación Total
+     │   │   ├── ampliacion/ampliacion.spec.ts       # Suite de Ampliación de Plazo
+    │   │   └── consolidacion/                     # Pendiente
+    │   └── utils/
+    │       ├── csv-data.ts        # Lectura de CSV y helpers de filas
+    │       ├── selectors.ts       # Mapa central de GUIDs, selectores y SOX_MAP
+    │       └── simulador-flow.ts  # Login, carga principal y helpers de lectura/escritura
+    ├── playwright-report/          # Reporte HTML de ejecuciones (gitignored)
+    └── test-results/               # Evidencias y trazabilidad (gitignored)
 ```
 
 ## Responsabilidad de cada parte
 
-- `data/`: casos, datos y valores esperados.
-- `pages/`: acciones y elementos de cada página o mecanismo.
-- `utils/`: lectura de datos, interpretación de resultados y funciones compartidas.
-- `tests/`: pruebas independientes por mecanismo.
-- `reportes/`: resultados y evidencias de las ejecuciones.
+- `data/`: casos, datos de entrada y valores esperados en CSV.
+- `src/utils/csv-data.ts`: lectura de CSV, normalización de encabezados, búsqueda de casos por `id_caso` y conversión de números.
+- `src/utils/selectors.ts`: mapa centralizado de GUIDs y selectores por página de cada mecanismo, botones de navegación y de mecanismo, y `SOX_MAP` para localizar las cajas de observaciones y SOX de cada mecanismo.
+- `src/utils/simulador-flow.ts`: login, carga de la pestaña principal (tipo documento, identificación, obligación, marca, edad de mora y gestión telefónica) y helpers de lectura/escritura de campos.
+- `src/tests/`: casos de prueba por mecanismo. `main.spec.ts` contiene el caso de control `AC_0001`.
 - `Docuementacion/`: definición funcional y técnica del proyecto.
+- Los artefactos `*.json` de la raíz (por ejemplo `cancelacion-pag1-fields.json`) son snapshots locales de levantamiento de campos y no se versionan.
 
-Cada suite debe reutilizar el flujo general de ingreso, selección de obligación, selección del mecanismo, diligenciamiento y validación. Las diferencias propias de cada negocio deben permanecer en la página y en los casos del mecanismo correspondiente.
+Cada suite reutiliza el flujo general de ingreso, selección de obligación, selección del mecanismo, diligenciamiento y validación. Las diferencias propias de cada negocio permanecen en la utilidad de flujo y en los casos del mecanismo correspondiente.
+
+## Estado de implementación
+
+- `control`: implementado (`main.spec.ts`).
+- `pagomora`: implementado (`pagomora/pagomora.spec.ts`).
+- `cancelacion`: implementado (`cancelacion/cancelacion.spec.ts`).
+- `ampliacion`: implementado (`ampliacion/ampliacion.spec.ts`).
+- `novacion` y `consolidacion`: carpetas creadas, suites pendientes.
 
 ## Estrategia de ejecución
 
-La ejecución tendrá un caso de control previo y cinco suites independientes:
+La ejecución tiene un caso de control previo y las suites de mecanismos:
 
-1. `control.spec.ts` ejecuta `CONTROL_001` con una cédula y una obligación estables.
-2. Si `CONTROL_001` falla, las suites de mecanismos no deben ejecutarse.
-3. Si `CONTROL_001` pasa, se habilitan las suites de Pago de Mora, Novación, Cancelación Total, Ampliación de Plazo y Consolidación de Productos.
+1. El proyecto `control` ejecuta `AC_0001` con una cédula y una obligación estables.
+2. Si `AC_0001` falla, las suites de mecanismos no deben ejecutarse.
+3. Si `AC_0001` pasa, se habilitan las suites de mecanismos. Los proyectos dependientes (`dependencies`) se definen en `playwright.config.ts`; actualmente `pagomora`, `cancelacion` y `ampliacion` dependen de `control`.
 4. Cada mecanismo utiliza su propio contexto de Playwright y no comparte la página del caso de control.
 5. Las suites pueden ejecutarse en paralelo únicamente cuando sus clientes y obligaciones no se interfieran.
 
-En esta documentación, una **cédula** es un dato de entrada y un **caso de prueba** es la validación que utiliza ese dato. `CONTROL_001` es el caso de control; la cédula estable asociada se mantiene en los datos de prueba.
+En esta documentación, una **cédula** es un dato de entrada y un **caso de prueba** es la validación que utiliza ese dato. `AC_0001` es el caso de control; la cédula estable asociada se mantiene en `.env_data`.
 
 ## Documentos relacionados
 

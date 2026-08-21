@@ -6,6 +6,8 @@ node_modules/
 **/blob-report/
 **/playwright/.cache/
 **/playwright/.auth/
+**/playwright/chrome-profile/
+**/playwright/chrome-profile-*/
 .env
 .env_data
 .opencode/

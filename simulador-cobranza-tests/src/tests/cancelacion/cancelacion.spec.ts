@@ -33,7 +33,7 @@ const comparisonRows = readCsv(comparePath);
 
 async function loadCancelacion(page: Page, row: CsvRow): Promise<void> {
   await page.locator(MECANISMOS.cancelacion).click();
-  await expect(page.locator(CANCELACION_PAG1.pagoMinimo.css)).toBeAttached();
+  await expect(page.locator(CANCELACION_PAG1.tab.tabpanel)).toBeVisible({ timeout: 30_000 });
 
   const esUnaTc = getValue(row, 'es_una_tc');
   if (nonEmpty(esUnaTc)) {
@@ -65,7 +65,7 @@ async function loadCancelacion(page: Page, row: CsvRow): Promise<void> {
     await fillNumeric(page, CANCELACION_PAG1.saldoTotal.css, saldoTotal);
   }
 
-  const interesCorriente = getValue(row, 'interes_cte', 'interes_corriente');
+  const interesCorriente = getValue(row, 'interes_cte');
   if (nonEmpty(interesCorriente)) {
     await fillNumeric(page, CANCELACION_PAG1.interesCorriente.css, interesCorriente);
   }
@@ -75,7 +75,7 @@ async function loadCancelacion(page: Page, row: CsvRow): Promise<void> {
     await fillNumeric(page, CANCELACION_PAG1.interesMora.css, interesMora);
   }
 
-  const interesExtra = getValue(row, 'interes_extracontables_tc', 'interes_extracontable_tc');
+  const interesExtra = getValue(row, 'interes_extracontables_tc');
   if (nonEmpty(interesExtra)) {
     await fillNumeric(page, CANCELACION_PAG1.interesExtracontablesTC.css, interesExtra);
   }
@@ -115,8 +115,11 @@ async function loadCancelacion(page: Page, row: CsvRow): Promise<void> {
     await dateInput.press('Tab');
   }
 
-  await page.locator(`${NAV.rightArrowCA1}:visible`).click();
-  await expect(page.locator(CANCELACION_PAG2.plantillaSOX.css)).toBeAttached();
+  await page
+    .locator(CANCELACION_PAG1.tab.tabpanel)
+    .locator(`${NAV.rightArrowCA1}:visible`)
+    .click();
+  await expect(page.locator(CANCELACION_PAG2.tab.tabpanel)).toBeVisible({ timeout: 30_000 });
 }
 
 const comparisonFields = [

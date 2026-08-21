@@ -59,13 +59,38 @@ export const MECANISMOS = {
   itau: 'button.itau',
 } as const;
 
+// Vistas are 1-based; ng-bootstrap panel IDs are zero-based.
+export const VISTAS = {
+  PRINCIPAL: 1,
+  NOVACIONES_P1: 2,
+  NOVACIONES_P2: 3,
+  AMPLIACION_P1: 4,
+  AMPLIACION_P2: 18,
+  AMPLIACION_P3: 7,
+  CANCELACION_TOTAL_PAG1: 5,
+  CANCELACION_P2: 6,
+  CANCELACION_P3: 13,
+  CONSOLIDACION_P1: 16,
+  CONSOLIDACION_P2: 9,
+  CONSOLIDACION_P4: 8,
+  PAGOMORA_P1: 17,
+  PAGOMORA_P2: 10,
+  CLIENTE_INFO_ECONOMICA: 12,
+  INFORMACION_CLIENTE: 15,
+  ITAU_P1: 14,
+} as const;
+
+export function vistaTab(vista: number): string {
+  return `[role="tabpanel"][aria-labelledby="ngb-nav-${vista - 1}"]`;
+}
+
 // ============================================================
 // PRINCIPAL - Sección compartida para todos los mecanismos
 // ============================================================
 export const PRINCIPAL = {
   tab: {
     /** Panel de la pestaña Principal */
-    tabpanel: '[role="tabpanel"][aria-labelledby="ngb-nav-0"]',
+    tabpanel: vistaTab(VISTAS.PRINCIPAL),
   },
 
   tipoDocumento: {
@@ -181,7 +206,7 @@ export const PRINCIPAL = {
 // ============================================================
 export const NOVACION_PAG1 = {
   tab: {
-    tabpanel: '[aria-label="Novacion Pag.1"]',
+    tabpanel: vistaTab(VISTAS.NOVACIONES_P1),
   },
 
   gxcHonorarios: {
@@ -377,7 +402,7 @@ export const NOVACION_PAG1 = {
 // ============================================================
 export const NOVACION_PAG2 = {
   tab: {
-    tabpanel: '[aria-label="Novaciones pag.2"]',
+    tabpanel: vistaTab(VISTAS.NOVACIONES_P2),
   },
 
   comprasAuto: {
@@ -476,7 +501,7 @@ export const NOVACION_PAG2 = {
 // ============================================================
 export const PAGO_MORA_PAG1 = {
   tab: {
-    tabpanel: '[aria-label="Mora pag1."]',
+    tabpanel: vistaTab(VISTAS.PAGOMORA_P1),
   },
 
   aplicaHonorarios: {
@@ -638,7 +663,7 @@ export const PAGO_MORA_PAG1 = {
 // ============================================================
 export const PAGO_MORA_PAG2 = {
   tab: {
-    tabpanel: '[aria-label="Mora pag2"]',
+    tabpanel: vistaTab(VISTAS.PAGOMORA_P2),
   },
 
   cuotaVencida: {
@@ -689,7 +714,7 @@ export const PAGO_MORA_PAG2 = {
 // CANCELACIÓN TOTAL - Página 1
 // ============================================================
 export const CANCELACION_PAG1 = {
-  tab: { tabpanel: '[role="tabpanel"][aria-labelledby="ngb-nav-38"]' },
+  tab: { tabpanel: vistaTab(VISTAS.CANCELACION_TOTAL_PAG1) },
 
   aplicaHonorarios: {
     label: 'Aplica Honorarios ?',
@@ -872,7 +897,7 @@ export const CANCELACION_PAG1 = {
 // CANCELACIÓN TOTAL - Página 2
 // ============================================================
 export const CANCELACION_PAG2 = {
-  tab: { tabpanel: '[role="tabpanel"][aria-labelledby="ngb-nav-39"]' },
+  tab: { tabpanel: vistaTab(VISTAS.CANCELACION_P2) },
   observaciones: {
     label: 'Observaciones de cancelación',
     id: '24e68f6c-b401-40d9-bb2d-ec6d246426f9',
@@ -892,7 +917,7 @@ export const CANCELACION_PAG2 = {
 // AMPLIACIÓN DE PLAZO - Página 1
 // ============================================================
 export const AMPLIACION_PAG1 = {
-  tab: { tabpanel: '[role="tabpanel"][aria-label="Ampliacion pag 1"]' },
+  tab: { tabpanel: vistaTab(VISTAS.AMPLIACION_P1) },
   aplicaHonorarios: {
     label: 'Aplica Honorarios ?',
     id: '020563ab-b407-433b-bcf3-c534456818f3',
@@ -1009,7 +1034,7 @@ export const AMPLIACION_PAG1 = {
 // AMPLIACIÓN DE PLAZO - Página 2
 // ============================================================
 export const AMPLIACION_PAG2 = {
-  tab: { tabpanel: '[role="tabpanel"][aria-label="Ampliacion pag 2"]' },
+  tab: { tabpanel: vistaTab(VISTAS.AMPLIACION_P2) },
   actividadEconomica: {
     label: 'Actividad Economica',
     id: '51550b53-1a9f-49cd-8274-abd718d04b51',
@@ -1080,7 +1105,7 @@ export const AMPLIACION_PAG2 = {
 // AMPLIACIÓN DE PLAZO - Página 3
 // ============================================================
 export const AMPLIACION_PAG3 = {
-  tab: { tabpanel: '[role="tabpanel"][aria-label="Ampliacion pag 3"]' },
+  tab: { tabpanel: vistaTab(VISTAS.AMPLIACION_P3) },
   observaciones: {
     label: 'Observaciones',
     id: '68d8ce24-c9fd-440b-995a-7ff027f628b6',
@@ -1100,7 +1125,7 @@ export const AMPLIACION_PAG3 = {
 // CONSOLIDACIÓN DE PRODUCTOS - Página 1
 // ============================================================
 export const CONSOLIDACION_PAG1 = {
-  tab: { tabpanel: '[role="tabpanel"][aria-labelledby="ngb-nav-14"]' },
+  tab: { tabpanel: vistaTab(VISTAS.CONSOLIDACION_P1) },
 
   /** Contenedor de tarjetas; su cantidad depende de las obligaciones del cliente. */
   cards: {
@@ -1149,7 +1174,7 @@ export const CONSOLIDACION_PAG1 = {
 // CONSOLIDACIÓN DE PRODUCTOS - Página 2
 // ============================================================
 export const CONSOLIDACION_PAG2 = {
-  tab: { tabpanel: '[role="tabpanel"][aria-labelledby="ngb-nav-8"]' },
+  tab: { tabpanel: vistaTab(VISTAS.CONSOLIDACION_P2) },
 
   totalBajaIntCorrientes: {
     label: 'Total Baja en cuenta Int Corrientes',
@@ -1249,7 +1274,7 @@ export const CONSOLIDACION_PAG2 = {
 // CONSOLIDACIÓN DE PRODUCTOS - Actividad Económica
 // ============================================================
 export const CONSOLIDACION_ACTIVIDAD = {
-  tab: { tabpanel: '[role="tabpanel"][aria-labelledby="ngb-nav-10"]' },
+  tab: { tabpanel: vistaTab(VISTAS.CLIENTE_INFO_ECONOMICA) },
 
   cuotasFinancierasMensuales: {
     label: 'Cuotas financieras mensuales sin la del BDB: *',
@@ -1294,7 +1319,7 @@ export const CONSOLIDACION_ACTIVIDAD = {
 // CONSOLIDACIÓN DE PRODUCTOS - Página 4 / SOX
 // ============================================================
 export const CONSOLIDACION_PAG4 = {
-  tab: { tabpanel: '[role="tabpanel"][aria-labelledby="ngb-nav-7"]' },
+  tab: { tabpanel: vistaTab(VISTAS.CONSOLIDACION_P4) },
   observaciones: {
     label: 'Observaciones:',
     id: 'be70a202-71a9-40ea-851b-945702693b51',

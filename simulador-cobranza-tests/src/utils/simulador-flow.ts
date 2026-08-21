@@ -112,13 +112,29 @@ export async function selectLabel(
 
 export async function fillNumeric(page: Page, selector: string, value: string): Promise<void> {
   const hiddenInput = page.locator(selector);
-  const displayInput = hiddenInput.locator('xpath=preceding-sibling::input[1]');
-  const input = (await displayInput.count()) > 0 ? displayInput : hiddenInput;
+  let input: Locator | undefined;
 
-  await input.click();
-  await input.press('ControlOrMeta+A');
-  await input.type(value.replace(/[$,\s]/g, ''), { delay: 10 });
-  await input.press('Tab');
+  for (let index = 0; index < (await hiddenInput.count()); index += 1) {
+    const currentInput = hiddenInput.nth(index);
+    const displayInput = currentInput.locator('xpath=preceding-sibling::input[1]').first();
+
+    if ((await displayInput.count()) > 0 && (await displayInput.isVisible())) {
+      input = displayInput;
+      break;
+    }
+
+    if (await currentInput.isVisible()) {
+      input = currentInput;
+      break;
+    }
+  }
+
+  expect(input, `No se encontró un campo numérico visible para ${selector}`).toBeTruthy();
+
+  await input!.click();
+  await input!.press('ControlOrMeta+A');
+  await input!.type(value.replace(/[$,\s]/g, ''), { delay: 10 });
+  await input!.press('Tab');
 }
 
 export async function readNumeric(page: Page, selector: string): Promise<string> {
