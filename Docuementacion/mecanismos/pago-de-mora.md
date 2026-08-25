@@ -22,6 +22,7 @@ Verificar que una negociación de Pago de Mora cargue correctamente la obligaci�
 - **Negociación con variaciones:** campañas, cobros menores, cobros mayores u otros valores definidos por los asesores.
 - **Validaciones individuales:** honorarios, gastos 90 y demás campos específicos que apliquen.
 - **Tarjetas:** confirmar el resultado esperado cuando el caso incluya una obligación asociada a tarjeta de crédito.
+- **Piloto-GXC:** validar el valor diligenciado, el máximo permitido y la confirmación de honorarios cuando aplique.
 
 ## Validaciones
 
@@ -32,6 +33,7 @@ Verificar que una negociación de Pago de Mora cargue correctamente la obligaci�
 - Campos de honorarios y gastos cuando correspondan.
 - Indicador esperado para tarjeta de crédito cuando aplique.
 - Valores clave de la información SOX.
+- Campos `valormaximopilotos`, `valorGXCpilotoconfirm` y `honorarioscomfirm` para casos piloto-GXC.
 
 ## Datos y casos
 

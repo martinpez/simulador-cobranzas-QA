@@ -85,6 +85,7 @@ Este archivo indica qué se diligencian en la aplicación para cada caso. Una fi
 | `pagonegociacion` | Pago para la negociación (consolidación). |
 | `honorarios` | Honorarios. |
 | `pago_snr` | Pago al SNR. |
+| `valorgastosGXC` | Valor que se diligencia en el campo de valor GXC cuando el caso es piloto-GXC. |
 
 El encabezado real del archivo es la lista de estas columnas en el orden mostrado. Como las columnas son por mecanismo, se diligencian únicamente las que corresponden al caso en cuestión.
 
@@ -100,20 +101,24 @@ Contiene los valores esperados con los que se comparan los resultados leídos de
 | `gxc_honorarios` | Valor esperado del campo GXC / Honorarios (texto). |
 | `linea` | Línea esperada. |
 | `tipo_cartera` | Tipo de cartera esperado. |
+| `diasmora` | Días de mora esperados en la negociación. |
 | `abono_minimo_max` | Abono mínimo con máximo porcentaje permitido. |
 | `maximohonorarios` | Valor máximo de honorarios. |
+| `honorarioscomfirm` | Valor de honorarios que debe coincidir con el valor diligenciado cuando aplique. |
 | `max_total_baja` | Máximo total de baja en cuentas. |
 | `bajacuentaIntCte` | Baja en cuenta de interés corriente. |
 | `bajacuentaIntMora` | Baja en cuenta de interés de mora. |
 | `bajacuentaIntExtra` | Baja en cuenta de intereses extracontables. |
+| `valormaximopilotos` | Máximo permitido para el valor del piloto-GXC. |
+| `valorGXCpilotoconfirm` | Valor GXC del piloto confirmado por la aplicación. |
 | `sox` | Cadena SOX esperada (texto). |
 
 ## Comparación de resultados
 
 Los `spec` leen los campos calculados de la aplicación y los comparan contra `data_compare.csv`:
 
-- Los campos numéricos (`abono_minimo_max`, `max_total_baja`, `bajacuentaIntCte`, `bajacuentaIntMora`, `bajacuentaIntExtra`) se comparan como números.
-- Los campos de texto (`gxc_honorarios` y `sox`) se comparan con el texto normalizado (minúsculas, espacios colapsados).
+- Los campos numéricos (`diasmora`, `abono_minimo_max`, `maximohonorarios`, `honorarioscomfirm`, `max_total_baja`, `bajacuentaIntCte`, `bajacuentaIntMora`, `bajacuentaIntExtra`, `valormaximopilotos`, `valorGXCpilotoconfirm`) se comparan como números.
+- Los campos de texto (`gxc_honorarios`, `linea`, `tipo_cartera` y `sox`) se comparan con el texto normalizado (minúsculas, espacios colapsados). Las variantes de label de piloto-GXC se consideran equivalentes.
 - Si una columna esperada está vacía, la comparación de ese campo se omite.
 - El resultado de la comparación y los datos cargados se adjuntan como evidencia al caso (`datos-cargados.json` y `resultado-comparacion.json`).
 

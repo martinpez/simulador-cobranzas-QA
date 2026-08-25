@@ -24,7 +24,9 @@ import {
   normalizedText,
   readNumeric,
   readSelectLabel,
+  retryMechanismNavigation,
   selectLabel,
+  waitForSox,
 } from '../../utils/simulador-flow';
 
 const dataPath = path.resolve(__dirname, '../../../data/datos_negociacion.csv');
@@ -33,8 +35,11 @@ const negotiationRows = readCsv(dataPath);
 const comparisonRows = readCsv(comparePath);
 
 async function loadCancelacion(page: Page, row: CsvRow): Promise<void> {
-  await page.locator(MECANISMOS.cancelacion).click();
-  await expect(page.locator(CANCELACION_PAG1.tab.tabpanel)).toBeVisible({ timeout: 30_000 });
+  await retryMechanismNavigation(
+    page,
+    MECANISMOS.cancelacion,
+    page.locator(CANCELACION_PAG1.tab.tabpanel)
+  );
 
   const esUnaTc = getValue(row, 'es_una_tc');
   if (nonEmpty(esUnaTc)) {
@@ -121,6 +126,7 @@ async function loadCancelacion(page: Page, row: CsvRow): Promise<void> {
     .locator(`${NAV.rightArrowCA1}:visible`)
     .click();
   await expect(page.locator(CANCELACION_PAG2.tab.tabpanel)).toBeVisible({ timeout: 30_000 });
+  await waitForSox(page, CANCELACION_PAG2.plantillaSOX.css);
 }
 
 const comparisonFields = [

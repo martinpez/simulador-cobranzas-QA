@@ -22,6 +22,7 @@ Verificar que una negociación de Cancelación Total cargue correctamente la obl
 - **Negociación con variaciones:** cancelaciones parciales, cobros o pagos con valores diferentes a los del caso base.
 - **Validaciones individuales:** honorarios, gastos, FUN y demás campos que apliquen.
 - **Tarjetas:** confirmar el resultado esperado cuando la obligación corresponda a una tarjeta de crédito.
+- **Piloto-GXC:** validar el valor GXC ingresado y el máximo de honorarios permitido.
 
 ## Validaciones implementadas
 
@@ -32,6 +33,7 @@ Verificar que una negociación de Cancelación Total cargue correctamente la obl
 - `gxc_honorarios`, abono mínimo, bajas en cuenta, máximo total de baja y SOX contra `data_compare.csv`.
 - Campos numéricos como números y campos de texto, incluido SOX, con texto normalizado.
 - Evidencias de datos cargados y resultado de comparación por caso.
+- En casos piloto-GXC se validan `valormaximopilotos`, `valorGXCpilotoconfirm` y `honorarioscomfirm` cuando exista el campo.
 
 ## Datos y casos
 

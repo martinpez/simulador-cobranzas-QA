@@ -46,6 +46,12 @@ La información SOX es una cadena construida con los valores de la negociación 
 
 La implementación actual compara la cadena SOX completa de forma normalizada (minúsculas y espacios colapsados) contra el valor esperado en `data_compare.csv`. Esta comparación de cadena completa difiere de la recomendación inicial de extraer y validar solo valores clave (porcentajes, abonos, pagos mínimos, intereses); si se requiere validar valores puntuales, se debe migrar la comparación a una extracción por campo en `data_compare.csv`.
 
+## Piloto-GXC
+
+Los casos piloto-GXC se identifican por `gxc_honorarios` con valor `piloto-gxc`. El valor que se diligencia se registra en `datos_negociacion.csv` como `valorgastosGXC`. La automatización valida contra `data_compare.csv` el máximo permitido (`valormaximopilotos`), el valor GXC confirmado (`valorGXCpilotoconfirm`) y los honorarios confirmados (`honorarioscomfirm`) cuando el mecanismo exponga ese campo.
+
+Los controles de piloto pueden conservar el mismo GUID entre mecanismos y presentar labels diferentes. Por eso los selectores mantienen el GUID y las comparaciones normalizan las variantes de label de piloto-GXC.
+
 ## Mapa de GUIDs
 
 `src/utils/selectors.ts` concentra los selectores de la aplicación:

@@ -24,7 +24,9 @@ import {
   normalizedText,
   readNumeric,
   readSelectLabel,
+  retryMechanismNavigation,
   selectLabel,
+  waitForSox,
 } from '../../utils/simulador-flow';
 
 const dataPath = path.resolve(__dirname, '../../../data/datos_negociacion.csv');
@@ -33,8 +35,11 @@ const negotiationRows = readCsv(dataPath);
 const comparisonRows = readCsv(comparePath);
 
 async function loadPagoMora(page: Page, row: CsvRow): Promise<void> {
-  await page.locator(MECANISMOS.pagoMora).click();
-  await expect(page.locator(PAGO_MORA_PAG1.tab.tabpanel)).toBeVisible({ timeout: 30_000 });
+  await retryMechanismNavigation(
+    page,
+    MECANISMOS.pagoMora,
+    page.locator(PAGO_MORA_PAG1.tab.tabpanel)
+  );
 
   const esUnaTc = getValue(row, 'es_una_tc');
   if (nonEmpty(esUnaTc)) {
@@ -71,6 +76,7 @@ async function loadPagoMora(page: Page, row: CsvRow): Promise<void> {
     .locator(`${NAV.rightArrowM}:visible`)
     .click();
   await expect(page.locator(PAGO_MORA_PAG2.tab.tabpanel)).toBeVisible({ timeout: 30_000 });
+  await waitForSox(page, PAGO_MORA_PAG2.sox.css);
 
   const cuotaVencida = getValue(row, 'cuota_vencida');
   if (nonEmpty(cuotaVencida)) {

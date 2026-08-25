@@ -22,6 +22,7 @@ Verificar que una negociación de Ampliación de Plazo cargue correctamente la o
 - **Negociación con variaciones:** diferentes plazos, tasas, pagos o condiciones definidas por los asesores.
 - **Validaciones individuales:** campos y cálculos propios de la ampliación.
 - **Casos excepcionales:** plazos o condiciones poco usuales con resultado previamente validado.
+- **Piloto-GXC:** validar el valor GXC ingresado y el máximo de honorarios permitido.
 
 ## Validaciones implementadas
 
@@ -32,6 +33,7 @@ Verificar que una negociación de Ampliación de Plazo cargue correctamente la o
 - `gxc_honorarios`, línea, tipo de cartera, abono, bajas en cuenta y SOX contra `data_compare.csv`.
 - Campos numéricos como números y campos de texto, incluido SOX, con texto normalizado.
 - Evidencias de datos cargados y resultado de comparación por caso.
+- En casos piloto-GXC se validan `valormaximopilotos`, `valorGXCpilotoconfirm` y `honorarioscomfirm` cuando exista el campo.
 
 ## Datos y casos
 

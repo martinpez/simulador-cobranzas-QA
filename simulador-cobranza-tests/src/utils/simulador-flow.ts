@@ -263,3 +263,68 @@ export async function loadPrincipal(page: Page, row: CsvRow): Promise<void> {
     await selectLabel(page, page.locator(PRINCIPAL.gestionTelefonica.css), gestionTelefonica);
   }
 }
+
+export async function retryMechanismNavigation(
+  page: Page,
+  mechanismSelector: string,
+  expectedTabpanel: Locator,
+  maxRetries = 5,
+  retryDelayMs = 1000,
+  attemptTimeoutMs = 10_000
+): Promise<void> {
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    if (!page.isClosed()) {
+      console.log(`[retryMechanismNavigation] Intento ${attempt}/${maxRetries}...`);
+    }
+
+    try {
+      if (page.isClosed()) {
+        throw new Error('Página cerrada antes de poder hacer click');
+      }
+      await page.locator(mechanismSelector).click();
+      await expectedTabpanel.waitFor({ state: 'visible', timeout: attemptTimeoutMs });
+      return;
+    } catch (error) {
+      if (attempt === maxRetries || page.isClosed()) {
+        throw new Error(
+          `Navegación al mecanismo falló después de ${attempt} intentos. ` +
+            `Último error: ${error instanceof Error ? error.message : String(error)}`
+        );
+      }
+      console.log(
+        `[retryMechanismNavigation] Reintentando en ${retryDelayMs}ms...`
+      );
+      await page.waitForTimeout(retryDelayMs);
+    }
+  }
+}
+
+export async function waitForSox(
+  page: Page,
+  soxSelector: string,
+  timeout = 30_000
+): Promise<void> {
+  const sox = page.locator(soxSelector);
+  const deadline = Date.now() + timeout;
+  const intervals = [500, 1000, 2000, 3000, 5000];
+
+  while (Date.now() < deadline) {
+    const value = await sox.inputValue();
+    if (
+      value.includes('FECHAPAGOXX') &&
+      value.includes('VALORCONSIGSNRXX') &&
+      value.includes('INTERES CORRIENTE')
+    ) {
+      return;
+    }
+    const waitTime = intervals.shift() ?? 5000;
+    intervals.push(waitTime);
+    await page.waitForTimeout(waitTime);
+  }
+
+  const finalValue = await sox.inputValue();
+  throw new Error(
+    `El campo SOX no se actualizó correctamente dentro de ${timeout}ms. ` +
+      `Valor actual: "${finalValue.substring(0, 200)}..."`
+  );
+}

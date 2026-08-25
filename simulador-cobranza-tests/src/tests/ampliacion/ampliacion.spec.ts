@@ -25,7 +25,9 @@ import {
   normalizedText,
   readNumeric,
   readSelectLabel,
+  retryMechanismNavigation,
   selectLabel,
+  waitForSox,
 } from '../../utils/simulador-flow';
 
 const dataPath = path.resolve(__dirname, '../../../data/datos_negociacion.csv');
@@ -75,8 +77,11 @@ async function waitForAmpliacionSox(page: Page, expected: CsvRow): Promise<void>
 }
 
 async function loadAmpliacion(page: Page, row: CsvRow, expected: CsvRow): Promise<void> {
-  await page.locator(MECANISMOS.ampliacion).click();
-  await expect(page.locator(AMPLIACION_PAG1.tab.tabpanel)).toBeVisible({ timeout: 30_000 });
+  await retryMechanismNavigation(
+    page,
+    MECANISMOS.ampliacion,
+    page.locator(AMPLIACION_PAG1.tab.tabpanel)
+  );
 
   const linea = getValue(row, 'linea');
   if (nonEmpty(linea)) {
@@ -212,6 +217,7 @@ async function loadAmpliacion(page: Page, row: CsvRow, expected: CsvRow): Promis
   }
 
   await waitForAmpliacionFields(page, expected);
+  await waitForSox(page, AMPLIACION_PAG3.plantillaSOX.css);
 
   await page
     .locator(AMPLIACION_PAG2.tab.tabpanel)
