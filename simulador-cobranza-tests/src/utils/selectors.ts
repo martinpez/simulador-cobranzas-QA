@@ -513,6 +513,24 @@ export const PAGO_MORA_PAG1 = {
     disabled: true,
   },
 
+  linea: {
+    label: 'Línea',
+    id: '9ccfa8bd-4060-4aa1-b437-4528d6f9bc35',
+    hostSelector: '[aria-owns="9ccfa8bd-4060-4aa1-b437-4528d6f9bc35_listbox"]',
+    css: 'select[id="9ccfa8bd-4060-4aa1-b437-4528d6f9bc35"]',
+  },
+  diasMora: {
+    label: 'Días Mora*',
+    id: '247db41e-ea0d-444b-b3d0-627aae51ecd0',
+    css: 'input[id="247db41e-ea0d-444b-b3d0-627aae51ecd0"]',
+  },
+  tipoCartera: {
+    label: 'Tipo de Cartera',
+    id: '6e51a18a-184d-455f-9f42-6b3a3d56729f',
+    hostSelector: '[aria-owns="6e51a18a-184d-455f-9f42-6b3a3d56729f_listbox"]',
+    css: 'select[id="6e51a18a-184d-455f-9f42-6b3a3d56729f"]',
+  },
+
   esUnaTC: {
     label: 'ES UNA "TC"?*',
     id: '7a5c89e8-a431-4b76-b3bc-24f6a187978c',
@@ -655,6 +673,18 @@ export const PAGO_MORA_PAG1 = {
     css: 'input[id="3539dba8-0c22-491e-a05b-84642d675d59"]',
     getByRole: { role: 'spinbutton' as const, name: '$0' },
     defaultValue: '$0',
+  },
+
+  maxValorPermitidoPilotoGXC: {
+    label: 'Valor Maximo Pilotos',
+    id: '993c55c0-8b02-4be9-a122-d7ec2cf5f87e',
+    css: 'input[id="993c55c0-8b02-4be9-a122-d7ec2cf5f87e"]',
+    disabled: true,
+  },
+  valorGxcPiloto: {
+    label: 'Valor GXC Piloto:*',
+    id: 'ae33bcc4-183a-47de-a6c8-f4ecc44be169',
+    css: 'input[id="ae33bcc4-183a-47de-a6c8-f4ecc44be169"]',
   },
 } as const;
 

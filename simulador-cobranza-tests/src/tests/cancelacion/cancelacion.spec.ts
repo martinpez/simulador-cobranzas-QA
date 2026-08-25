@@ -20,6 +20,7 @@ import {
   loadPrincipal,
   login,
   nonEmpty,
+  normalizedGxcText,
   normalizedText,
   readNumeric,
   readSelectLabel,
@@ -90,7 +91,7 @@ async function loadCancelacion(page: Page, row: CsvRow): Promise<void> {
     await fillNumeric(page, CANCELACION_PAG1.pagoAlSNR.css, pagoSnr);
   }
 
-  const honorarios = getValue(row, 'honorarios');
+  const honorarios = getValue(row, 'valorgastosGXC', 'honorarios');
   if (nonEmpty(honorarios)) {
     await fillNumeric(page, CANCELACION_PAG1.honorarios.css, honorarios);
   }
@@ -126,12 +127,16 @@ const comparisonFields = [
   'gxc_honorarios',
   'linea',
   'tipo_cartera',
+  'diasmora',
   'abono_minimo_max',
   'maximohonorarios',
+  'honorarioscomfirm',
   'max_total_baja',
   'bajacuentaIntCte',
   'bajacuentaIntMora',
   'bajacuentaIntExtra',
+  'valormaximopilotos',
+  'valorGXCpilotoconfirm',
   'sox',
 ] as const;
 
@@ -192,15 +197,19 @@ async function compareCancelacion(
     gxc_honorarios: await readSelectLabel(page, CANCELACION_PAG1.aplicaHonorarios.css),
     linea: await readSelectLabel(page, CANCELACION_PAG1.linea.css),
     tipo_cartera: await readSelectLabel(page, CANCELACION_PAG1.tipoCartera.css),
+    diasmora: await readNumeric(page, CANCELACION_PAG1.diasMora.css),
     abono_minimo_max: await readNumeric(
       page,
       CANCELACION_PAG1.abonoMinimoMaxPermitido.css
     ),
     maximohonorarios: await readNumeric(page, CANCELACION_PAG1.valorHonorariosMaximo.css),
+    honorarioscomfirm: await readNumeric(page, CANCELACION_PAG1.honorarios.css),
     max_total_baja: await readNumeric(page, CANCELACION_PAG1.maxBajaEnCuentas.css),
     bajacuentaIntCte: await readNumeric(page, CANCELACION_PAG1.bajaCuentaIntCte.css),
     bajacuentaIntMora: await readNumeric(page, CANCELACION_PAG1.bajaCuentaIntMora.css),
     bajacuentaIntExtra: await readNumeric(page, CANCELACION_PAG1.bajaCuentaIntExtracTC.css),
+    valormaximopilotos: await readNumeric(page, CANCELACION_PAG1.valorHonorariosMaximo.css),
+    valorGXCpilotoconfirm: await readNumeric(page, CANCELACION_PAG1.honorarios.css),
     sox: await page.locator(CANCELACION_PAG2.plantillaSOX.css).inputValue(),
   };
   const actualFields = new Set(Object.keys(actual).map(normalizeMechanism));
@@ -225,7 +234,17 @@ async function compareCancelacion(
       return { field, skipped: true, expected: '', actual: actual[field], pass: true };
     }
 
-    if (['gxc_honorarios', 'linea', 'tipo_cartera', 'sox'].includes(field)) {
+    if (field === 'gxc_honorarios') {
+      return {
+        field,
+        skipped: false,
+        expected: expectedValue,
+        actual: actual[field],
+        pass: normalizedGxcText(actual[field]) === normalizedGxcText(expectedValue),
+      };
+    }
+
+    if (['linea', 'tipo_cartera', 'sox'].includes(field)) {
       return {
         field,
         skipped: false,

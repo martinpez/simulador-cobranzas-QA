@@ -6,6 +6,21 @@ export function normalizedText(value: string): string {
   return value.trim().replace(/\s+/g, ' ').toLowerCase();
 }
 
+export function normalizedGxcText(value: string): string {
+  const normalized = normalizedMechanismText(value);
+  return normalized.includes('piloto') && normalized.includes('gxc')
+    ? 'pilotogxc'
+    : normalizedText(value);
+}
+
+function normalizedMechanismText(value: string): string {
+  return value
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]/g, '');
+}
+
 export function nonEmpty(value: string): boolean {
   return value.trim() !== '';
 }

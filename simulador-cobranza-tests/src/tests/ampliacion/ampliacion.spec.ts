@@ -21,6 +21,7 @@ import {
   loadPrincipal,
   login,
   nonEmpty,
+  normalizedGxcText,
   normalizedText,
   readNumeric,
   readSelectLabel,
@@ -32,7 +33,48 @@ const comparePath = path.resolve(__dirname, '../../../data/data_compare.csv');
 const negotiationRows = readCsv(dataPath);
 const comparisonRows = readCsv(comparePath);
 
-async function loadAmpliacion(page: Page, row: CsvRow): Promise<void> {
+async function waitForAmpliacionFields(page: Page, expected: CsvRow): Promise<void> {
+  const pollOptions = { timeout: 30_000, intervals: [250, 500, 1_000] };
+  const fields = {
+    abono_minimo_max: AMPLIACION_PAG1.abonoConBajaMax.css,
+    maximohonorarios: AMPLIACION_PAG1.valorHonorariosMaximo.css,
+    max_total_baja: AMPLIACION_PAG1.totalBajasEnCuentas.css,
+    bajacuentaIntCte: AMPLIACION_PAG1.bajaCuentaIntCte.css,
+    bajacuentaIntMora: AMPLIACION_PAG1.bajaCuentaIntMora.css,
+  } as const;
+
+  for (const [field, selector] of Object.entries(fields)) {
+    const expectedValue = getValue(expected, field);
+    if (!nonEmpty(expectedValue)) {
+      continue;
+    }
+
+    await expect
+      .poll(() => readNumeric(page, selector), pollOptions)
+      .toBe(expectedValue);
+  }
+}
+
+async function waitForAmpliacionSox(page: Page, expected: CsvRow): Promise<void> {
+  const honorariosExpected = nonEmpty(getValue(expected, 'maximohonorarios'));
+  const sox = page.locator(AMPLIACION_PAG3.plantillaSOX.css);
+  const pollOptions = { timeout: 30_000, intervals: [250, 500, 1_000] };
+  await expect.poll(() => sox.inputValue(), pollOptions).toMatch(/FECHAPAGOXX\d+/i);
+  await expect
+    .poll(() => sox.inputValue(), pollOptions)
+    .toMatch(/VALORCONSIGSNRXX\d+/i);
+  await expect
+    .poll(() => sox.inputValue(), pollOptions)
+    .toMatch(/INTERES CORRIENTE DE\s+\d+/i);
+
+  if (honorariosExpected) {
+    await expect
+      .poll(() => sox.inputValue(), pollOptions)
+      .toMatch(/VALORHONORARIOSXX[1-9][0-9]*/i);
+  }
+}
+
+async function loadAmpliacion(page: Page, row: CsvRow, expected: CsvRow): Promise<void> {
   await page.locator(MECANISMOS.ampliacion).click();
   await expect(page.locator(AMPLIACION_PAG1.tab.tabpanel)).toBeVisible({ timeout: 30_000 });
 
@@ -81,7 +123,7 @@ async function loadAmpliacion(page: Page, row: CsvRow): Promise<void> {
     await fillNumeric(page, AMPLIACION_PAG1.pagoAlSNR.css, pagoSnr);
   }
 
-  const honorarios = getValue(row, 'honorarios');
+  const honorarios = getValue(row, 'valorgastosGXC', 'honorarios');
   if (nonEmpty(honorarios)) {
     await fillNumeric(page, AMPLIACION_PAG1.honorarios.css, honorarios);
   }
@@ -169,23 +211,30 @@ async function loadAmpliacion(page: Page, row: CsvRow): Promise<void> {
     );
   }
 
+  await waitForAmpliacionFields(page, expected);
+
   await page
     .locator(AMPLIACION_PAG2.tab.tabpanel)
     .locator(`${NAV.rightArrowAM2}:visible`)
     .click();
   await expect(page.locator(AMPLIACION_PAG3.tab.tabpanel)).toBeVisible({ timeout: 30_000 });
+  await waitForAmpliacionSox(page, expected);
 }
 
 const comparisonFields = [
   'gxc_honorarios',
   'linea',
   'tipo_cartera',
+  'diasmora',
   'abono_minimo_max',
   'maximohonorarios',
+  'honorarioscomfirm',
   'max_total_baja',
   'bajacuentaIntCte',
   'bajacuentaIntMora',
   'bajacuentaIntExtra',
+  'valormaximopilotos',
+  'valorGXCpilotoconfirm',
   'sox',
 ] as const;
 
@@ -246,11 +295,15 @@ async function compareAmpliacion(
     gxc_honorarios: await readSelectLabel(page, AMPLIACION_PAG1.aplicaHonorarios.css),
     linea: await readSelectLabel(page, AMPLIACION_PAG1.linea.css),
     tipo_cartera: await readSelectLabel(page, AMPLIACION_PAG1.tipoCartera.css),
+    diasmora: await readNumeric(page, AMPLIACION_PAG1.diasMora.css),
     abono_minimo_max: await readNumeric(page, AMPLIACION_PAG1.abonoConBajaMax.css),
     maximohonorarios: await readNumeric(page, AMPLIACION_PAG1.valorHonorariosMaximo.css),
+    honorarioscomfirm: await readNumeric(page, AMPLIACION_PAG1.honorarios.css),
     max_total_baja: await readNumeric(page, AMPLIACION_PAG1.totalBajasEnCuentas.css),
     bajacuentaIntCte: await readNumeric(page, AMPLIACION_PAG1.bajaCuentaIntCte.css),
     bajacuentaIntMora: await readNumeric(page, AMPLIACION_PAG1.bajaCuentaIntMora.css),
+    valormaximopilotos: await readNumeric(page, AMPLIACION_PAG1.valorHonorariosMaximo.css),
+    valorGXCpilotoconfirm: await readNumeric(page, AMPLIACION_PAG1.honorarios.css),
     sox: await page.locator(AMPLIACION_PAG3.plantillaSOX.css).inputValue(),
   };
   const actualFields = new Set(Object.keys(actual).map(normalizeMechanism));
@@ -275,7 +328,17 @@ async function compareAmpliacion(
       return { field, skipped: true, expected: '', actual: actual[field], pass: true };
     }
 
-    if (['gxc_honorarios', 'linea', 'tipo_cartera', 'sox'].includes(field)) {
+    if (field === 'gxc_honorarios') {
+      return {
+        field,
+        skipped: false,
+        expected: expectedValue,
+        actual: actual[field],
+        pass: normalizedGxcText(actual[field]) === normalizedGxcText(expectedValue),
+      };
+    }
+
+    if (['linea', 'tipo_cartera', 'sox'].includes(field)) {
       return {
         field,
         skipped: false,
@@ -325,7 +388,7 @@ for (const caseId of getAmpliacionCaseIds()) {
   test(`${caseId} - Ampliación`, async ({ page }, testInfo) => {
     await login(page);
     await loadPrincipal(page, row!);
-    await loadAmpliacion(page, row!);
+    await loadAmpliacion(page, row!, expected!);
     await compareAmpliacion(page, row!, expected!, testInfo);
   });
 }

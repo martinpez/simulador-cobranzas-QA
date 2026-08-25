@@ -20,6 +20,7 @@ import {
   loadPrincipal,
   login,
   nonEmpty,
+  normalizedGxcText,
   normalizedText,
   readNumeric,
   readSelectLabel,
@@ -60,6 +61,11 @@ async function loadPagoMora(page: Page, row: CsvRow): Promise<void> {
     await fillNumeric(page, PAGO_MORA_PAG1.pagoAlSNR.css, pagoSnr);
   }
 
+  const valorGxc = getValue(row, 'valorgastosGXC');
+  if (nonEmpty(valorGxc)) {
+    await fillNumeric(page, PAGO_MORA_PAG1.valorGxcPiloto.css, valorGxc);
+  }
+
   await page
     .locator(PAGO_MORA_PAG1.tab.tabpanel)
     .locator(`${NAV.rightArrowM}:visible`)
@@ -94,11 +100,18 @@ async function loadPagoMora(page: Page, row: CsvRow): Promise<void> {
 
 const comparisonFields = [
   'gxc_honorarios',
+  'linea',
+  'tipo_cartera',
+  'diasmora',
   'abono_minimo_max',
+  'maximohonorarios',
+  'honorarioscomfirm',
   'max_total_baja',
   'bajacuentaIntCte',
   'bajacuentaIntMora',
   'bajacuentaIntExtra',
+  'valormaximopilotos',
+  'valorGXCpilotoconfirm',
   'sox',
 ] as const;
 
@@ -157,11 +170,18 @@ async function comparePagoMora(
 ): Promise<void> {
   const actual: Record<string, string> = {
     gxc_honorarios: await readSelectLabel(page, PAGO_MORA_PAG1.aplicaHonorarios.css),
+    linea: await readSelectLabel(page, PAGO_MORA_PAG1.linea.css),
+    diasmora: await readNumeric(page, PAGO_MORA_PAG1.diasMora.css),
+    tipo_cartera: await readSelectLabel(page, PAGO_MORA_PAG1.tipoCartera.css),
     abono_minimo_max: await readNumeric(page, PAGO_MORA_PAG1.abonoMinimoMaxPermitido.css),
+    maximohonorarios: '0',
+    honorarioscomfirm: '0',
     max_total_baja: await readNumeric(page, PAGO_MORA_PAG1.maxTotalBajaCuenta.css),
     bajacuentaIntCte: await readNumeric(page, PAGO_MORA_PAG1.maxBajaCuentaIntCte.css),
     bajacuentaIntMora: await readNumeric(page, PAGO_MORA_PAG1.maxBajaCuentaIntMora.css),
     bajacuentaIntExtra: await readNumeric(page, PAGO_MORA_PAG1.maxBajaCuentaExtraCTC.css),
+    valormaximopilotos: await readNumeric(page, PAGO_MORA_PAG1.maxValorPermitidoPilotoGXC.css),
+    valorGXCpilotoconfirm: await readNumeric(page, PAGO_MORA_PAG1.valorGxcPiloto.css),
     sox: await page.locator(PAGO_MORA_PAG2.sox.css).inputValue(),
   };
   const actualFields = new Set(Object.keys(actual).map(normalizeMechanism));
@@ -186,7 +206,17 @@ async function comparePagoMora(
       return { field, skipped: true, expected: '', actual: actual[field], pass: true };
     }
 
-    if (field === 'gxc_honorarios' || field === 'sox') {
+    if (field === 'gxc_honorarios') {
+      return {
+        field,
+        skipped: false,
+        expected: expectedValue,
+        actual: actual[field],
+        pass: normalizedGxcText(actual[field]) === normalizedGxcText(expectedValue),
+      };
+    }
+
+    if (['linea', 'tipo_cartera', 'sox'].includes(field)) {
       return {
         field,
         skipped: false,
