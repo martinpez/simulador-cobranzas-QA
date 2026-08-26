@@ -65,6 +65,12 @@ export default defineConfig({
       dependencies: ['control'],
       use: { ...devices['Desktop Chrome'] },
     },
+    {
+      name: 'novacion',
+      testMatch: /novacion\/.*\.spec\.ts/,
+      dependencies: ['control'],
+      use: { ...devices['Desktop Chrome'] },
+    },
   ],
 
   /* Run your local dev server before starting the tests */

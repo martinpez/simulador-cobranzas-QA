@@ -324,6 +324,26 @@ export const NOVACION_PAG1 = {
     defaultValue: '$15,729',
   },
 
+  valorMaximoPilotos: {
+    label: 'Valor Maximo Pilotos',
+    id: 'ca478a50-d210-4a8e-b64c-aef8fa26955b',
+    css: 'input[id="ca478a50-d210-4a8e-b64c-aef8fa26955b"]',
+    disabled: true,
+  },
+
+  honorariosMaxPermitido: {
+    label: 'Honorarios Max Permitido',
+    id: '1b7acda2-ec9a-4c72-937b-57fc95e4a4d1',
+    css: 'input[id="1b7acda2-ec9a-4c72-937b-57fc95e4a4d1"]',
+    disabled: true,
+  },
+
+  honorariosNovacion: {
+    label: 'Honorarios Novacion *',
+    id: '075c9be0-baad-48b2-864d-acae840b7256',
+    css: 'input[id="075c9be0-baad-48b2-864d-acae840b7256"]',
+  },
+
   interesCorriente: {
     label: 'Interes Corriente Novacion',
     id: 'e2c2ca76-e568-413d-8aac-b7bd2c3b9f52',
