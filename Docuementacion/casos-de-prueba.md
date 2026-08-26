@@ -86,8 +86,16 @@ Este archivo indica qué se diligencian en la aplicación para cada caso. Una fi
 | `honorarios` | Honorarios. |
 | `pago_snr` | Pago al SNR. |
 | `valorgastosGXC` | Valor que se diligencia en el campo de valor GXC cuando el caso es piloto-GXC. |
+| `Toggle-obl-consolidacion` | Obligaciones que se incluirán en Consolidación, separadas por `;`. El orden de esta lista define la posición de las ediciones por obligación. |
+| `saldo_total_obl` | Valores opcionales de saldo por obligación, alineados con `Toggle-obl-consolidacion`. |
+| `honorarios_obl` | Valores opcionales de honorarios por obligación, alineados con `Toggle-obl-consolidacion`. |
+| `interes_cte_obl` | Valores opcionales de interés corriente por obligación, alineados con `Toggle-obl-consolidacion`. |
+| `interes_mora_obl` | Valores opcionales de interés de mora por obligación, alineados con `Toggle-obl-consolidacion`. |
+| `interes_extracontables_obl` | Valores opcionales de intereses extracontables por obligación, alineados con `Toggle-obl-consolidacion`. |
 
 El encabezado real del archivo es la lista de estas columnas en el orden mostrado. Como las columnas son por mecanismo, se diligencian únicamente las que corresponden al caso en cuestión.
+
+Para Consolidación, las columnas terminadas en `_obl` conservan las posiciones vacías. Por ejemplo, `;;20122;;;;;;;` modifica únicamente el tercer elemento de una lista de diez obligaciones. Si una lista posicional no tiene la misma cantidad de elementos que `Toggle-obl-consolidacion`, el caso se considera inválido.
 
 ## `data_compare.csv` — Valores esperados
 

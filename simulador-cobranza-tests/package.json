@@ -15,6 +15,7 @@
     "test:cancelacion": "playwright test --project=cancelacion",
     "test:ampliacion": "playwright test --project=ampliacion",
     "test:novacion": "playwright test --project=novacion",
+    "test:consolidacion": "playwright test --project=consolidacion",
     "test:dev": "playwright test --project=control --debug",
     "test:prod": "playwright test --ui",
     "report": "playwright show-report"

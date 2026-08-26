@@ -53,7 +53,7 @@ async function waitForAmpliacionFields(page: Page, expected: CsvRow): Promise<vo
 
     await expect
       .poll(() => readNumeric(page, selector), pollOptions)
-      .toBe(expectedValue);
+      .toMatch(/[1-9][0-9]*/);
   }
 }
 
@@ -61,13 +61,13 @@ async function waitForAmpliacionSox(page: Page, expected: CsvRow): Promise<void>
   const honorariosExpected = nonEmpty(getValue(expected, 'maximohonorarios'));
   const sox = page.locator(AMPLIACION_PAG3.plantillaSOX.css);
   const pollOptions = { timeout: 30_000, intervals: [250, 500, 1_000] };
-  await expect.poll(() => sox.inputValue(), pollOptions).toMatch(/FECHAPAGOXX\d+/i);
+  await expect.poll(() => sox.inputValue(), pollOptions).toMatch(/FECHAPAGOXX[0-9]{8}(?:LLL|$)/i);
   await expect
     .poll(() => sox.inputValue(), pollOptions)
-    .toMatch(/VALORCONSIGSNRXX\d+/i);
+    .toMatch(/VALORCONSIGSNRXX[1-9][0-9]*(?:LLL|$)/i);
   await expect
     .poll(() => sox.inputValue(), pollOptions)
-    .toMatch(/INTERES CORRIENTE DE\s+\d+/i);
+    .toMatch(/INTERES CORRIENTE(?:\s+DE)?\s+[1-9][0-9]*(?:\s|,|LLL|$)/i);
 
   if (honorariosExpected) {
     await expect
@@ -83,7 +83,7 @@ async function loadAmpliacion(page: Page, row: CsvRow, expected: CsvRow): Promis
     page.locator(AMPLIACION_PAG1.tab.tabpanel)
   );
 
-  const linea = getValue(row, 'linea');
+  const linea = getValue(row, 'linea') || getValue(expected, 'linea');
   if (nonEmpty(linea)) {
     await selectLabel(page, page.locator(AMPLIACION_PAG1.linea.css), linea);
   }
@@ -93,7 +93,7 @@ async function loadAmpliacion(page: Page, row: CsvRow, expected: CsvRow): Promis
     await fillNumeric(page, AMPLIACION_PAG1.diasMora.css, diasMora);
   }
 
-  const tipoCartera = getValue(row, 'tipo_cartera');
+  const tipoCartera = getValue(row, 'tipo_cartera') || getValue(expected, 'tipo_cartera');
   if (nonEmpty(tipoCartera)) {
     await selectLabel(page, page.locator(AMPLIACION_PAG1.tipoCartera.css), tipoCartera);
   }

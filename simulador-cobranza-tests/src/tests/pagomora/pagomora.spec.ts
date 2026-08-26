@@ -76,8 +76,6 @@ async function loadPagoMora(page: Page, row: CsvRow): Promise<void> {
     .locator(`${NAV.rightArrowM}:visible`)
     .click();
   await expect(page.locator(PAGO_MORA_PAG2.tab.tabpanel)).toBeVisible({ timeout: 30_000 });
-  await waitForSox(page, PAGO_MORA_PAG2.sox.css);
-
   const cuotaVencida = getValue(row, 'cuota_vencida');
   if (nonEmpty(cuotaVencida)) {
     await selectLabel(page, page.locator(PAGO_MORA_PAG2.cuotaVencida.css), cuotaVencida);
@@ -102,6 +100,8 @@ async function loadPagoMora(page: Page, row: CsvRow): Promise<void> {
   if (nonEmpty(tramite)) {
     await selectLabel(page, page.locator(PAGO_MORA_PAG2.requiereTramiteExcepcion.css), tramite);
   }
+
+  await waitForSox(page, PAGO_MORA_PAG2.sox.css);
 }
 
 const comparisonFields = [

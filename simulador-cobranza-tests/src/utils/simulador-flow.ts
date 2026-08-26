@@ -125,8 +125,12 @@ export async function selectLabel(
     .click();
 }
 
-export async function fillNumeric(page: Page, selector: string, value: string): Promise<void> {
-  const hiddenInput = page.locator(selector);
+export async function fillNumeric(
+  page: Page,
+  selector: string | Locator,
+  value: string
+): Promise<void> {
+  const hiddenInput = typeof selector === 'string' ? page.locator(selector) : selector;
   let input: Locator | undefined;
 
   for (let index = 0; index < (await hiddenInput.count()); index += 1) {
@@ -144,7 +148,7 @@ export async function fillNumeric(page: Page, selector: string, value: string): 
     }
   }
 
-  expect(input, `No se encontró un campo numérico visible para ${selector}`).toBeTruthy();
+  expect(input, `No se encontró un campo numérico visible para ${String(selector)}`).toBeTruthy();
 
   await input!.click();
   await input!.press('ControlOrMeta+A');
@@ -269,7 +273,7 @@ export async function retryMechanismNavigation(
   mechanismSelector: string,
   expectedTabpanel: Locator,
   maxRetries = 5,
-  retryDelayMs = 1000,
+  retryDelayMs = 50,
   attemptTimeoutMs = 10_000
 ): Promise<void> {
   for (let attempt = 1; attempt <= maxRetries; attempt++) {
@@ -311,9 +315,9 @@ export async function waitForSox(
   while (Date.now() < deadline) {
     const value = await sox.inputValue();
     if (
-      value.includes('FECHAPAGOXX') &&
-      value.includes('VALORCONSIGSNRXX') &&
-      value.includes('INTERES CORRIENTE')
+      /FECHAPAGOXX[0-9]{8}(?:LLL|$)/i.test(value) &&
+      /VALORCONSIGSNRXX[1-9][0-9]*(?:LLL|$)/i.test(value) &&
+      /INTERES CORRIENTE(?:\s+DE)?\s+[1-9][0-9]*(?:\s|,|LLL|$)/i.test(value)
     ) {
       return;
     }

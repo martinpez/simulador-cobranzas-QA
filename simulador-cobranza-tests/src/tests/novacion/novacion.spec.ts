@@ -129,6 +129,12 @@ async function loadNovacion(page: Page, row: CsvRow, expected: CsvRow): Promise<
   const tasaNovacion = getValue(row, 'por_tasa_novacion', 'por_tasa');
   if (nonEmpty(tasaNovacion)) {
     await fillNumeric(page, NOVACION_PAG1.porcentajeTasaNovacion.css, tasaNovacion);
+    await expect
+      .poll(() => readNumeric(page, NOVACION_PAG1.porcentajeTasaNovacion.css), {
+        timeout: 30_000,
+        intervals: [250, 500, 1_000],
+      })
+      .toBe(tasaNovacion);
   }
 
   const tasaGxc = getValue(row, 'por_tasa_gxc', 'tasa_gxc');
@@ -218,6 +224,14 @@ async function loadNovacion(page: Page, row: CsvRow, expected: CsvRow): Promise<
     .locator(`${NAV.leftArrow2}:visible`)
     .click();
   await expect(page.locator(NOVACION_PAG1.tab.tabpanel)).toBeVisible({ timeout: 30_000 });
+
+  // Al volver a la página 1, la aplicación puede restaurar la tasa por defecto.
+  // Reaplicar el valor antes de generar la plantilla conserva la tasa del CSV.
+  if (nonEmpty(tasaNovacion)) {
+    await fillNumeric(page, NOVACION_PAG1.porcentajeTasaNovacion.css, tasaNovacion);
+    await waitForNovacionFields(page, expected);
+  }
+
   await page
     .locator(NOVACION_PAG1.tab.tabpanel)
     .locator(`${NAV.rightArrow}:visible`)

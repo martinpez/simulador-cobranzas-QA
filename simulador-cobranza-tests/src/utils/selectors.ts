@@ -40,6 +40,8 @@ export const NAV = {
   rightArrowC: '.right-buttonC',
   leftArrowC2: '.left-buttonC2',
   rightArrowC2: '.right-buttonC2',
+  leftArrowC3: '.left-buttonC3',
+  rightArrowC3: '.right-buttonC3',
   leftArrowC4: '.left-buttonC4',
   rightArrowC4: '.right-buttonC4',
   leftArrow2: '.left-button2',
